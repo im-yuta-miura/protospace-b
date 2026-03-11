@@ -1,10 +1,10 @@
-package in.tech_camp.prototype_b;
+package in.tech_camp.protospace_b;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PrototypeBApplicationTests {
+class ProtospaceBApplicationTests {
 
 	@Test
 	void contextLoads() {

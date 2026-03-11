@@ -1,13 +1,13 @@
-package in.tech_camp.prototype_b;
+package in.tech_camp.protospace_b;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PrototypeBApplication {
+public class ProtospaceBApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PrototypeBApplication.class, args);
+		SpringApplication.run(ProtospaceBApplication.class, args);
 	}
 
 }
