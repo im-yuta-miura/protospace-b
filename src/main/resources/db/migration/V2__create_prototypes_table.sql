@@ -6,6 +6,6 @@ CREATE TABLE prototypes (
   image       VARCHAR(512)    NOT NULL,
   user_id     INT             NOT NULL,
 
-  PRIMARY KEY (id)
-  FOREIGN KEY (user_id)  REFERENCES users(id),
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id)  REFERENCES users(id)
 );
