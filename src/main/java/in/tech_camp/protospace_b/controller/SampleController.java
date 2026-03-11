@@ -1,4 +1,4 @@
-package in.tech_camp.prototype_b.controller;
+package in.tech_camp.protospace_b.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
