@@ -1,5 +1,5 @@
 CREATE TABLE users (
-  user_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(512) NOT NULL,
   profile VARCHAR(1024) NOT NULL,
   affiliation VARCHAR(512),
