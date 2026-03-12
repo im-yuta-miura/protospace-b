@@ -1,4 +1,20 @@
 <!DOCTYPE html>
 <header th:fragment="header" xmlns:th="http://www.thymeleaf.org"  class="header">
+  
   <img th:src="@{/images/logo.png}" class="logo">
+
+  <!-- ログイン時に表示される -->
+  <div class="nav" th:if="${#authorization.expression('isAuthenticated()')}">
+    <form th:action="@{/logout}" method="post">
+      <input class="button" type="submit" value="ログアウト"/>
+    </form>
+    <a class="button" th:href="@{/tweets/new}">New Proto</a>
+  </div>
+
+  <!-- 未ログイン時に表示される -->
+  <div class="nav" th:if="${#authorization.expression('!isAuthenticated()')}">
+    <a class="button" th:href="@{/users/sign_up}">新規登録</a>
+    <a class="button" th:href="@{/users/login}">ログイン</a>
+  </div>
+
 </header>

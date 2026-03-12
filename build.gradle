@@ -36,6 +36,18 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	// バリデーション
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// JUnit H2
+	testImplementation 'com.h2database:h2'
+	// JUnit Faker
+	implementation 'org.yaml:snakeyaml:1.29'
+	implementation 'com.github.javafaker:javafaker:1.0.2'
+	// Jsoup
+  testImplementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.named('test') {
