@@ -10,7 +10,7 @@ public class SampleController {
   
   @GetMapping("/")
   public String sample(){
-      return "sample";
+      return "form";
   }
   
 }
