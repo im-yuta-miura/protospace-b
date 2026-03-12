@@ -13,6 +13,7 @@ public class UserEntity {
   private Integer id;
   private String name;
   private String profile;
+  private String affiliation;
   private String position;
   private String email;
   private String password;
