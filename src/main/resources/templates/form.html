@@ -12,25 +12,25 @@
         <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
           <div class="field">
           <label>プロトタイプの名称</label>
-          <input type="text" th:filed="title">
+          <input type="text" th:field="*{title}">
           </div>
 
 
           <div class="field">
           <label>キャッチコピー</label>
-          <input type="text" th:filed="catchphrase">
+          <input type="text" th:field="*{catchphrase}">
           </div>
 
 
           <div class="field">
           <label>コンセプト</label>
-          <input type="text" th:filed="concept">
+          <input type="text" th:field="*{concept}">
           </div>
 
 
           <div class="field">
           <label>プロトタイプの画像</label><br />
-          <input type="file" name="image">
+          <input type="text" th:field="*{image}" placeholder="https://example.com/image.jpg">
           </div>
 
 
