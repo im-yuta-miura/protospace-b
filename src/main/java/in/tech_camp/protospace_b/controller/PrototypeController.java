@@ -17,7 +17,9 @@ public class PrototypeController {
 
   @GetMapping("/")
   public String showPrototype(Model model) {
+    String userName = "新井";
     List<PrototypeEntity> prototypes = prototypeRepository.findAll();
+    model.addAttribute("userName", userName);
     model.addAttribute("prototypes",prototypes);
     return "prototypes/index";
   }
