@@ -9,33 +9,33 @@
     <div class="contents">
       <div class="container">
         <h1>新規プロトタイプ投稿</h1>
-        <form class="">
+        <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
           <div class="field">
           <label>プロトタイプの名称</label>
-          <input type="text" name="title">
+          <input type="text" th:filed="title">
           </div>
 
 
           <div class="field">
           <label>キャッチコピー</label>
-          <input type="text" name="title">
+          <input type="text" th:filed="catchphrase">
           </div>
 
 
           <div class="field">
           <label>コンセプト</label>
-          <input type="text" name="title">
+          <input type="text" th:filed="concept">
           </div>
 
 
           <div class="field">
-
-
+          <label>プロトタイプの画像</label>
+          <input type="file" name="image">
           </div>
 
 
-          <div class="">
-            <input type="submit" value="保存する">
+          <div class="actions">
+          <input type="submit" value="保存する">
           </div>
         </form>
       </div>
