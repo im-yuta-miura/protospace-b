@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
-  private Long id;
+  private Integer id;
   private String name;
   private String profile;
   private String position;
