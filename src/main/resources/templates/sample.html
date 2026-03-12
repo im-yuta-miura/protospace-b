@@ -11,7 +11,10 @@
 <body class="body">
   <th:block th:replace="~{header :: header}"></th:block>
   <div class="main_container">
-    <!-- ここに何かしら実装 -->
+    <!-- サンプルページなので後でトップページにも実装 -->
+    <div>
+      <span th:text="${#authentication?.principal.getName()}"></span>さん
+    </div>
   </div>
   <th:block th:replace="~{footer :: footer}"></th:block>
 </body>

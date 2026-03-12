@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/sample.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="body">
+  <th:block th:replace="~{header :: header}"></th:block>
+  <div class="main_container">
+
+    <h1>ユーザー新規登録</h1>
+
+    <ul th:if="${errorMessages != null and !errorMessages.empty}">
+      <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
+    </ul>
+
+    <form th:action="@{/user}" th:method="post" th:object="${userForm}">
+
+      <div class="field">
+        <label for="email">メールアドレス</label><br />
+        <input type="text" id="email" th:field="*{email}"  autofocus="autofocus"/>
+      </div>
+
+      <div class="field">
+        <label for="password">パスワード</label><br />
+        <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
+      </div>
+
+      <div class="field">
+        <label for="passwordConfirmation">パスワード(再入力)</label><br />
+        <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
+      </div>
+
+      <div class="field">
+        <label for="name">ユーザー名</label><br />
+        <input type="text" id="name" th:field="*{name}"  autofocus="autofocus" />
+      </div>
+
+      <div class="field">
+        <label for="profile">プロフィール</label><br />
+        <textarea id="profile" th:field="*{profile}"></textarea>
+      </div>
+      
+      <div class="field">
+        <label for="affiliation">所属</label><br />
+        <textarea id="affiliation" th:field="*{affiliation}"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="position">役職</label><br />
+        <textarea id="position" th:field="*{position}"></textarea>
+      </div>
+
+      <input type="submit" value="新規登録" />
+
+    </form>
+  </div>
+  <th:block th:replace="~{footer :: footer}"></th:block>
+</body>
+</html>

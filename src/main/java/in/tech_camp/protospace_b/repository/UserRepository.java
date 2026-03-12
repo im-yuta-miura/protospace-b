@@ -24,7 +24,7 @@ public interface UserRepository {
   void insert(UserEntity user);
 
   @Select("SELECT EXISTS(SELECT 1 FROM users WHERE email = #{email})")
-  boolean isExistsByEmail(String email);
+  boolean existsByEmail(String email);
 
   @Select("SELECT * FROM users WHERE email = #{email}")
   UserEntity findByEmail(String email);
