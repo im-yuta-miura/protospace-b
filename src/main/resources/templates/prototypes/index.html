@@ -11,7 +11,7 @@
 <div th:insert="~{header :: header}"></div>
 
 <div class="contents_area">
-  <p th:text="|こんにちは、${userName}さん|"></p>
+  <p th:text="${name} + 'さん、こんにちは'"></p>
   <div class="contents">
     <div th:each="prototype : ${prototypes}" class="content_prototype">
       <img class="image" th:src="@{prototype.image}">
