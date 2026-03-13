@@ -1,0 +1,26 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.eol": "\n",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.dependency.packagePresentation": "hierarchical",
+  "java.debug.logLevel": "verbose",
+  "jdk.runConfig.arguments": "--debug",
+
+  "cSpell.words": [
+    "factorypath",
+    "flywaydb",
+    "gradlew",
+    "javafaker",
+    "mybatis",
+    "nbbuild",
+    "nbdist",
+    "nbproject",
+    "projectlombok",
+    "protospace",
+    "snakeyaml",
+    "springsecurity",
+    "thymeleaf"
+  ]
+}
