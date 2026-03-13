@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.PrototypeForm;
+
+import in.tech_camp.protospace_b.entity.PrototypeEntity;
+import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import lombok.AllArgsConstructor;
 
@@ -74,5 +78,16 @@ public class PrototypeController {
     }
 
     return "redirect:/";
+  }
+  
+  @GetMapping("/")
+  public String showPrototype(@AuthenticationPrincipal UserEntity user, Model model) {
+    if (user != null) {
+      model.addAttribute("name", user.getName());
+    }
+    
+    List<PrototypeEntity> prototypes = prototypeRepository.findAll();
+    model.addAttribute("prototypes",prototypes);
+    return "prototypes/index";
   }
 }

@@ -34,7 +34,11 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
+.vscode/*
+# 改行設定
+!.vscode/settings.json
+# 実行時設定
+!.vscode/launch.json
 
 src/main/resources/static/uploads/**
 !src/main/resources/static/uploads/.gitkeep
