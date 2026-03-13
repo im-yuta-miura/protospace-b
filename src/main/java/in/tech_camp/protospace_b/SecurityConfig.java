@@ -24,6 +24,7 @@ public class SecurityConfig {
                             "/images/**",
                             "/uploads/**",
                             "/",
+                            
                             "/users/sign_up",
                             "/users/login",
                             "/user",

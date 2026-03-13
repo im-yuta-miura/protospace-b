@@ -11,19 +11,19 @@ import java.util.List;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
-import in.tech_camp.protospace_b.form.PrototypeForm;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
+import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import in.tech_camp.protospace_b.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -45,7 +45,12 @@ public class PrototypeController {
   
 
   @PostMapping("/prototypes")
-  public String createPrototype(@ModelAttribute("prototypeForm") PrototypeForm prototypeForm, @AuthenticationPrincipal CustomUserDetail currentUser) {
+  public String createPrototype(@ModelAttribute("prototypeForm")  @Validated PrototypeForm prototypeForm, BindingResult bindingResult, @AuthenticationPrincipal CustomUserDetail currentUser) {
+
+    if(bindingResult.hasErrors() || prototypeForm.getImage().isEmpty()) {
+
+      return "form";
+    }
 
     PrototypeEntity prototype = new PrototypeEntity();
 
@@ -53,6 +58,9 @@ public class PrototypeController {
     prototype.setCatchphrase(prototypeForm.getCatchphrase());
     prototype.setConcept(prototypeForm.getConcept());
     
+    prototype.setUser_id(currentUser.getId());
+
+
     MultipartFile imageFile = prototypeForm.getImage();
     if (imageFile != null && !imageFile.isEmpty()){
       try{
@@ -64,12 +72,8 @@ public class PrototypeController {
 
       } catch (IOException e) {
         System.out.println("画像保存エラー:" + e);
-        return "redirect:/prototypes/new";
+        return "form";
       }
-    }
-
-    if (currentUser != null) {
-      prototype.setUser_id(currentUser.getId());
     }
 
   
@@ -77,7 +81,7 @@ public class PrototypeController {
       prototypeRepository.insert(prototype);
     } catch(Exception e) {
       System.out.println("エラー: " + e);
-      return "redirect:/";
+      return "form";
     }
 
     return "redirect:/";
