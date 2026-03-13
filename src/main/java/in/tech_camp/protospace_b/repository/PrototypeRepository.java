@@ -18,4 +18,6 @@ public interface PrototypeRepository {
   @Insert("INSERT INTO prototypes (title, catchphrase, concept, image, user_id) VALUES (#{title}, #{catchphrase}, #{concept}, #{image}, #{user_id})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(PrototypeEntity prototype);
+  @Select("SELECT * FROM prototypes WHERE id = #{id}")
+  PrototypeEntity findById(Integer id);
 }
