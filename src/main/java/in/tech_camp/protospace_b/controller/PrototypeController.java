@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import in.tech_camp.protospace_b.ImageUrl;
+import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
@@ -36,7 +38,7 @@ public class PrototypeController {
   
 
   @PostMapping("/prototypes")
-  public String createPrototype(@ModelAttribute("prototypeForm") PrototypeForm prototypeForm) {
+  public String createPrototype(@ModelAttribute("prototypeForm") PrototypeForm prototypeForm, @AuthenticationPrincipal CustomUserDetail currentUser) {
 
     PrototypeEntity prototype = new PrototypeEntity();
 
@@ -57,6 +59,10 @@ public class PrototypeController {
         System.out.println("画像保存エラー:" + e);
         return "redirect:/prototypes/new";
       }
+    }
+
+    if (currentUser != null) {
+      prototype.setUser_id(currentUser.getId());
     }
 
   

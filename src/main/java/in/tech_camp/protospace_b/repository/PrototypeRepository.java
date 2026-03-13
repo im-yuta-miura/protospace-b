@@ -15,7 +15,7 @@ public interface PrototypeRepository {
   @Select("SELECT * FROM prototypes")
     List<PrototypeEntity> findAll();
 
-  @Insert("INSERT INTO prototypes (title, catchphrase, concept, image) VALUES (#{title}, #{catchphrase}, #{concept}, #{image})")
+  @Insert("INSERT INTO prototypes (title, catchphrase, concept, image, user_id) VALUES (#{title}, #{catchphrase}, #{concept}, #{image}, #{user_id})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(PrototypeEntity prototype);
 }
