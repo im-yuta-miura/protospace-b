@@ -16,7 +16,7 @@
   </div>
   <div class="contents">
     <div th:each="prototype : ${prototypes}" class="content_prototype">
-      <img class="image" th:src="@{prototype.image}">
+      <img class="image" th:src="${prototype.image}">
       <div class="explain">
         <div class="info">
           <p class="title" th:text="${prototype.title}"></p>
@@ -27,7 +27,6 @@
     </div>
   </div>
 </div>
-
 
 <div th:insert="~{footer :: footer}"></div>
 

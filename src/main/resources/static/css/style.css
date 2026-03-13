@@ -33,7 +33,7 @@
   width: 1440px; 
   height: 859px;
   padding: 48px 208px;
-  gap: 1opx;
+  gap: 10px;
   overflow-y: auto;
 }
 
@@ -72,12 +72,13 @@
   gap: 8px;
   color: #3B4043;
 }
+
 .title{
   width: 140px;
-  height: 29pxx;
+  height: 29px;
   font-weight: 700;
   font-style: normal;
-  size: 20px;
+  font-size: 20px;
 }
 
 .catchphrase{
