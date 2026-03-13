@@ -1,11 +1,20 @@
 package in.tech_camp.protospace_b.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
@@ -16,6 +25,7 @@ import lombok.AllArgsConstructor;
 public class PrototypeController {
   private final PrototypeRepository prototypeRepository;
 
+  private final ImageUrl imageUrl;
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
         
@@ -33,7 +43,22 @@ public class PrototypeController {
     prototype.setTitle(prototypeForm.getTitle());
     prototype.setCatchphrase(prototypeForm.getCatchphrase());
     prototype.setConcept(prototypeForm.getConcept());
-    prototype.setImage(prototypeForm.getImage());
+    
+    MultipartFile imageFile = prototypeForm.getImage();
+    if (imageFile != null && !imageFile.isEmpty()){
+      try{
+        String uploadDir = imageUrl.getImageUrl();
+        String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
+        Path imagePath = Paths.get(uploadDir, fileName);
+        Files.copy(imageFile.getInputStream(), imagePath);
+        prototype.setImage("/uploads/" + fileName);
+
+      } catch (IOException e) {
+        System.out.println("画像保存エラー:" + e);
+        return "redirect:/prototypes/new";
+      }
+    }
+
   
     try {
       prototypeRepository.insert(prototype);
