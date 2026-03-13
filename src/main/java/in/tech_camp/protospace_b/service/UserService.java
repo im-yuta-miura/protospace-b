@@ -32,4 +32,12 @@ public class UserService {
 
     return user;
   }
+
+  public UserEntity findUserById(Integer id) {
+
+    // 中身がnullかもしれないことを呼び出し元に伝えるため、Optionalで包む
+    UserEntity user = userRepository.findById(id);
+
+    return user;
+  }
 }

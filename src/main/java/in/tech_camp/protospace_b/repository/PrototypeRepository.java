@@ -15,4 +15,7 @@ public interface PrototypeRepository {
 
   @Select("SELECT * FROM prototypes WHERE id = #{id}")
   PrototypeEntity findById(Integer id);
+  
+  @Select("SELECT * FROM prototypes WHERE user_id = #{userId}")
+  List<PrototypeEntity> getByUserId(Integer userId);
 }

@@ -26,10 +26,11 @@ public class SecurityConfig {
                 "/users/sign_up",
                 "/users/login",
                 "/user",
-                "/prototypes/{id:[0-9]+}"
+                "/prototypes/{id:[0-9]+}",
+                "/users/{id:[0-9]+}"
                 ).permitAll()
             .requestMatchers(HttpMethod.POST, "/user").permitAll()
-          .anyRequest().authenticated())
+            .anyRequest().authenticated())
         .formLogin(login -> login
             .loginProcessingUrl("/login")
             .loginPage("/users/login")
