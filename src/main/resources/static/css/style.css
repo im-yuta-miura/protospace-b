@@ -1,0 +1,114 @@
+.header{
+  box-sizing: border-box;
+  height: 77.5px;
+  width: 100%;
+  background-color: #F1F8FE;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 208px;
+}
+
+.logo{
+  width: 200px;
+  height: 37.5px;
+}
+
+.nav{
+  height: 31px;
+  width: 234px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.button{
+  padding: 5px 20px 6px 20px;
+  font-size: 14px;
+  color: #87CEFA;
+  border: #87CEFA 1px solid;
+}
+
+.contents_area{
+  width: 1440px; 
+  height: 859px;
+  padding: 48px 208px;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.contents{
+  width: 1026px;
+  height: 730px;
+  gap: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.content_prototype{
+  width: 324px;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+}
+
+.image{
+  width: 324px;
+  height:324px;
+  background-color: #909090;
+}
+
+.explain{
+  width: 324px;
+  height: 85px;
+  gap: 8px;
+}
+
+.info{
+  width: 191px;
+  height: 60px;
+  font-family: "Noto Sans CJK JP", sans-serif;
+  gap: 8px;
+  color: #3B4043;
+}
+
+.title{
+  width: 140px;
+  height: 29px;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.catchphrase{
+  width: 191px;
+  height: 23px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.name{
+  width: 324px;
+  height: 17px;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: right;
+  color: #999999;
+  text-decoration-line: underline;
+}
+
+.footer{
+  box-sizing: border-box;
+  height: 34px;
+  width: 100%;
+  padding: 10px;
+  background-color: #999999;
+  text-align: center;
+}
+
+.copyright{
+  color: #FFFFFF;
+  font-size: 10px;
+}
