@@ -20,10 +20,9 @@ public class PrototypeController {
   @GetMapping("/")
   public String showPrototype(@AuthenticationPrincipal UserEntity user, Model model) {
     if (user != null) {
-        model.addAttribute("name", user.getName());
-    } else {
-        model.addAttribute("name", "ゲスト");
+      model.addAttribute("name", user.getName());
     }
+    
     List<PrototypeEntity> prototypes = prototypeRepository.findAll();
     model.addAttribute("prototypes",prototypes);
     return "prototypes/index";
