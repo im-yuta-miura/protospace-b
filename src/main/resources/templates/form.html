@@ -14,20 +14,21 @@
         <h1>新規プロトタイプ投稿</h1>
         <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
           <div class="field">
-          <label>プロトタイプの名称</label>
+          <label>プロトタイプの名称</label><br />
           <input type="text" th:field="*{title}">
           </div>
 
 
           <div class="field">
-          <label>キャッチコピー</label>
-          <input type="text" th:field="*{catchphrase}">
+          <label>キャッチコピー</label><br />
+          <textarea th:field="*{catchphrase}"></textarea>
+        
           </div>
 
 
           <div class="field">
-          <label>コンセプト</label>
-          <input type="text" th:field="*{concept}">
+          <label>コンセプト</label><br />
+          <textarea th:field="*{concept}"></textarea>
           
           </div>
 
