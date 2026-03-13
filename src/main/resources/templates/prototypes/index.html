@@ -11,7 +11,7 @@
 <div th:insert="~{header :: header}"></div>
 
 <div class="contents_area">
-  <div sec:authorize="isAuthenticated()">
+  <div sec:authorize="isAuthenticated()" th:if="${name != null}">
     <p th:text="${name} + 'さん、こんにちは'"></p>
   </div>
   <div class="contents">
