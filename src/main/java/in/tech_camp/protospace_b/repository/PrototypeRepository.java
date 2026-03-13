@@ -11,7 +11,7 @@ import in.tech_camp.protospace_b.entity.PrototypeEntity;
 public interface PrototypeRepository {
   
   @Select("SELECT * FROM prototypes")
-    List<PrototypeEntity> findAll();
+  List<PrototypeEntity> findAll();
 
   @Select("SELECT * FROM prototypes WHERE id = #{id}")
   PrototypeEntity findById(Integer id);
