@@ -4,10 +4,23 @@
   "editor.detectIndentation": false,
   "files.eol": "\n",
   "java.configuration.updateBuildConfiguration": "interactive",
-  "cSpell.words": [
-    "protospace"
-  ],
   "java.dependency.packagePresentation": "hierarchical",
   "java.debug.logLevel": "verbose",
-  "jdk.runConfig.arguments": "--debug"
+  "jdk.runConfig.arguments": "--debug",
+
+  "cSpell.words": [
+    "factorypath",
+    "flywaydb",
+    "gradlew",
+    "javafaker",
+    "mybatis",
+    "nbbuild",
+    "nbdist",
+    "nbproject",
+    "projectlombok",
+    "protospace",
+    "snakeyaml",
+    "springsecurity",
+    "thymeleaf"
+  ]
 }
