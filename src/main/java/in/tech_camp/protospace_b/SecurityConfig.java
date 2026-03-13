@@ -25,7 +25,8 @@ public class SecurityConfig {
                             "/",
                             "/users/sign_up",
                             "/users/login",
-                            "/user"
+                            "/user",
+                            "/prototypes/{id:[0-9]+}"
                           ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
                         .anyRequest().authenticated())

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protospace</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body class="body">
+
+  <th:block th:replace="~{header :: header}"></th:block>
+
+  <div class="main_container">
+
+    <div class="contents_row">
+      <!-- Frame46 -->
+      <div class="content_post">
+        <!-- Frame45 -->
+        <div class="top_name">
+          <!-- Frame44 -->
+          <div class="top_titles">
+            <!-- Frame39 -->
+            <div class="title">
+              <p th:text="${prototype.title}"></p>
+            </div>
+            <a th:href="@{/users/{id}/mypage(id=${prototype.user_id})}" th:text="by + ${user.name}" class="username-link"></a>
+          </div>
+
+          <!-- Frame7 -->
+          <div class="under_titles" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.id == prototype.user_id}">
+            <!-- Frame5 -->
+            <a th:href="@{/prototypes/{id}/edit(id=${prototype.id})}" class="edit-btn" >編集する</a>
+            <!-- Frame6 -->
+            <a th:href="@{/prototypes/{id}/delete(id=${prototype.id})}" class="delete-btn" >削除する</a>
+          </div>
+        </div>
+        <!-- Frame19 -->
+        <img th:src="@{${prototype.image}}" class="image" alt="プロトタイプ画像">
+      </div>
+        
+      <!-- Frame53 -->
+      <div class="content_detail">
+        <!-- Frame49 -->
+        <div class="post-text">
+          <!-- Frame47 -->
+          <div class="catchphrase_box">
+            <!-- Frame40 -->
+            <div class="catchphrase_more">
+              <p>キャッチコピー</p>
+            </div>
+            <!-- Frame41 -->
+            <div class="catchphrase_text">
+              <p th:text="${prototype.catchphrase}"></p>
+            </div>
+          </div>
+          <!-- Frame48 -->
+          <div class="concept_box">
+            <!-- Frame42 -->
+            <div class="concept_more">
+              <p>コンセプト</p>
+            </div>
+            <!-- Frame43 -->
+            <div class="concept_text">
+              <p th:text="${prototype.concept}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<th:block th:replace="~{footer :: footer}"></th:block>
+
+</body>
+</html>
