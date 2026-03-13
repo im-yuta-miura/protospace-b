@@ -26,11 +26,11 @@
             <div class="title">
               <p th:text="${prototype.title}"></p>
             </div>
-            <a th:href="@{/users/{id}/mypage(id=${prototype.user_id})}" th:text="by + ${prototype.user_id}" class="username-link"></a>
+            <a th:href="@{/users/{id}/mypage(id=${prototype.user_id})}" th:text="by + ${user.name}" class="username-link"></a>
           </div>
 
           <!-- Frame7 -->
-          <div class="under_titles" >
+          <div class="under_titles" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.user.id == prototype.user_id}">
             <!-- Frame5 -->
             <a th:href="@{/prototypes/{id}/edit(id=${prototype.id})}" class="edit-btn" >編集する</a>
             <!-- Frame6 -->
