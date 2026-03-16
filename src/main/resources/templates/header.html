@@ -6,9 +6,9 @@
   <!-- ログイン時に表示される -->
   <div class="nav" th:if="${#authorization.expression('isAuthenticated()')}">
     <form th:action="@{/logout}" method="post">
-      <input class="button" type="submit" value="ログアウト"/>
+      <input class="button_logout" type="submit" value="ログアウト"/>
     </form>
-    <a class="button" th:href="@{/tweets/new}">New Proto</a>
+    <a class="button" th:href="@{/prototypes/new}">New Proto</a>
   </div>
 
   <!-- 未ログイン時に表示される -->

@@ -3,37 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sample</title>
+  <!--  -->
   <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/sample.css}" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <!--  -->
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/users/style.css}" rel="stylesheet" type="text/css">
+  <title>ユーザーログインページ</title>
+  
 </head>
 <body class="body">
   <th:block th:replace="~{header :: header}"></th:block>
-  <div class="main_container">
+  <div class="contents_area">
     
-    <h1>ユーザーログイン</h1>
+    <div class="users_module">
 
-    <p th:if="${loginError}" class="login-error" th:text="${loginError}"></p>
+      <h1 class="heading">ユーザーログイン</h1>
 
-    <form th:method="post" th:action="@{/login}" class="login">
-      
-      <div class="field">
-        <label class="column-title">メールアドレス</label><br />
-        <input type="text" id="email" name="email" autofocus="autofocus" required="required" />
-      </div>
+      <p th:if="${loginError}" class="login-error" th:text="${loginError}"></p>
 
-      <div class="field">
-        <label class="password">パスワード（6文字以上）</label><br />
-        <input type="password" name="password" required="required" autocomplete="off" />
-      </div>
+      <form th:method="post" th:action="@{/login}" class="form">
+        <div class="field_area">
 
-      <div class="actions">
-        <input type="submit" value="ログイン">
-      </div>
+          <div class="field">
+            <label class="column-title">メールアドレス</label><br />
+            <input type="email" id="email" name="email" autofocus="autofocus" required="required" />
+          </div>
 
-    </form>
+          <div class="field">
+            <label class="password">パスワード（6文字以上）</label><br />
+            <input type="password" name="password" required="required" autocomplete="off" />
+          </div>
 
+        </div>
+
+        <div class="actions">
+          <button class="submit_button" type="submit">ログイン</button>
+        </div>
+
+      </form>
+
+    </div>
   </div>
   <th:block th:replace="~{footer :: footer}"></th:block>
 </body>

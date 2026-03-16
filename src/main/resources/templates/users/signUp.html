@@ -3,61 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sample</title>
+  <title>ユーザー新規登録ページ</title>
+  <!--  -->
   <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/sample.css}" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <!--  -->
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/users/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body class="body">
   <th:block th:replace="~{header :: header}"></th:block>
-  <div class="main_container">
+  <div class="contents_area">
 
-    <h1>ユーザー新規登録</h1>
+    <div class="users_module">
 
-    <ul th:if="${errorMessages != null and !errorMessages.empty}">
-      <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
-    </ul>
-
-    <form th:action="@{/user}" th:method="post" th:object="${userForm}">
-
-      <div class="field">
-        <label for="email">メールアドレス</label><br />
-        <input type="text" id="email" th:field="*{email}"  autofocus="autofocus"/>
-      </div>
-
-      <div class="field">
-        <label for="password">パスワード</label><br />
-        <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
-      </div>
-
-      <div class="field">
-        <label for="passwordConfirmation">パスワード(再入力)</label><br />
-        <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
-      </div>
-
-      <div class="field">
-        <label for="name">ユーザー名</label><br />
-        <input type="text" id="name" th:field="*{name}"  autofocus="autofocus" />
-      </div>
-
-      <div class="field">
-        <label for="profile">プロフィール</label><br />
-        <textarea id="profile" th:field="*{profile}"></textarea>
-      </div>
+      <h1 class="heading">ユーザー新規登録</h1>
       
-      <div class="field">
-        <label for="affiliation">所属</label><br />
-        <textarea id="affiliation" th:field="*{affiliation}"></textarea>
-      </div>
+      <ul th:if="${errorMessages != null and !errorMessages.empty}">
+        <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
+      </ul>
 
-      <div class="field">
-        <label for="position">役職</label><br />
-        <textarea id="position" th:field="*{position}"></textarea>
-      </div>
+      <form th:action="@{/user}" th:method="post" th:object="${userForm}" class="form">
 
-      <input type="submit" value="新規登録" />
+        <div class="field_area">
+          <div class="field">
+            <label for="email">メールアドレス</label><br />
+            <input type="email" id="email" th:field="*{email}"  autofocus="autofocus"/>
+          </div>
 
-    </form>
+          <div class="field">
+            <label for="password">パスワード（6文字以上）</label><br />
+            <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
+          </div>
+
+          <div class="field">
+            <label for="passwordConfirmation">パスワード再入力</label><br />
+            <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
+          </div>
+
+          <div class="field">
+            <label for="name">ユーザー名</label><br />
+            <input type="text" id="name" th:field="*{name}"  autofocus="autofocus" />
+          </div>
+
+          <div class="field">
+            <label for="profile">プロフィール</label><br />
+            <textarea id="profile" th:field="*{profile}"></textarea>
+          </div>
+          
+          <div class="field">
+            <label for="affiliation">所属</label><br />
+            <textarea id="affiliation" th:field="*{affiliation}"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="position">役職</label><br />
+            <textarea id="position" th:field="*{position}"></textarea>
+          </div>
+        </div>
+        
+        <button class="submit_button" type="submit">新規登録</button>
+      </form>
+    </div>
+   
   </div>
   <th:block th:replace="~{footer :: footer}"></th:block>
 </body>
