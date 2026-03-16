@@ -16,18 +16,6 @@
   </div>
   <div class="contents">
     <div th:each="prototype : ${prototypes}" class="content_prototype">
-      <a th:href="@{/prototypes/{id}(id=${prototype.id})}">  
-        <img class="image" th:src="${prototype.image}">
-      </a>
-      <div class="explain">
-        <div class="info">
-          <a th:href="@{/prototypes/{id}(id=${prototype.id})}" class="title-link">
-            <p class="title" th:text="${prototype.title}"></p>
-          </a>
-          <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
-        </div>
-        <p class="name" th:text="|by ${prototype.user_id}|"></p>
-      </div>
       <div th:insert="~{prototype :: prototype}"></div>
     </div>
   </div>
