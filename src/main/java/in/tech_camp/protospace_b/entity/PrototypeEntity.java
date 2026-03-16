@@ -10,4 +10,5 @@ public class PrototypeEntity {
   private String concept;
   private String image;
   private Integer user_id;
+  private UserEntity user;
 }

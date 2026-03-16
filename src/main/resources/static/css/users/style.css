@@ -1,0 +1,69 @@
+
+:root{
+  --header-height: 80px
+}
+
+/* 外に影響が無いようにusers_moduleクラスに閉じ込める */
+.users_module{
+  
+  .heading{
+    font-size: 30px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .form {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    width: 100%;
+
+    .field_area{
+
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+
+      .field {
+
+        width: 100%;
+
+        font-size: 14px;
+
+        label{
+          font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"]{
+          width: 100%;
+          height: 22px;
+          max-width: 141px;
+        }
+
+        textarea {
+          width: 100%;
+          max-width: 510px;
+          height: 67px;
+          resize: none;
+        }
+      }
+    }
+    
+  }
+
+  .submit_button{
+    padding: 5px 20px;
+    background-color: #87CEFA;
+    color: #FFFFFF;
+    font-size: 14px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.14);
+    border: none;
+    border-radius: 3px;
+  }
+
+}
