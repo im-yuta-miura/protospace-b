@@ -101,7 +101,7 @@ public class PrototypeController {
   @GetMapping("/prototypes/{prototypeId}")
   public String showPrototypeDetail(@PathVariable("prototypeId") Integer prototypeId, Model model) {
       PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
-      UserEntity user = userRepository.findById(prototype.getUser_id());
+      UserEntity user = userRepository.findById(prototype.getUser().getId());
       model.addAttribute("prototype", prototype);
       model.addAttribute("user", user);
       
