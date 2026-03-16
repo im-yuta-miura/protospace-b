@@ -1,4 +1,9 @@
 /*  プロトタイプ詳細ページ */
+
+*{
+  font-family: "Noto Sans JP", sans-serif;
+}
+
 .contents_row{
   display: flex;
   flex-direction: column;
@@ -133,6 +138,16 @@
   font-size: 14px;
   color: #87CEFA;
   border: #87CEFA 1px solid;
+  text-decoration: none;
+}
+
+.button_logout{
+  padding: 5px 20px 6px 20px;
+  font-size: 14px;
+  color: #87CEFA;
+  border: none;
+  background: none;
+  text-decoration: none;
 }
 
 body {
@@ -180,7 +195,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 28px;
-
 }
 
 .post-text{
@@ -218,7 +232,6 @@ body {
   line-height: 1.0;
   letter-spacing: 0;
   color: #3B4043;
-;
 }
 
 .catchphrase_text{
@@ -260,7 +273,6 @@ body {
   line-height: 1.0;
   letter-spacing: 0;
   color: #3B4043;
-;
 }
 
 .concept_text{
