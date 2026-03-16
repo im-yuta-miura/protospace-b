@@ -18,22 +18,22 @@
         <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data" class="form-container">
           <div class="main-field">
             <div class="field">
-              <label class="form-label">プロトタイプの名称</label><br />
+              <label class="form-label">プロトタイプの名称</label>
               <input type="text" th:field="*{title}" class="form-text">
             </div>
 
             <div class="field">
-              <label class="form-label">キャッチコピー</label><br />
+              <label class="form-label">キャッチコピー</label>
               <textarea th:field="*{catchphrase}" class="form-text"></textarea>
             </div>
 
             <div class="field">
-              <label class="form-label">コンセプト</label><br />
+              <label class="form-label">コンセプト</label>
               <textarea th:field="*{concept}" class="form-text"></textarea>
             </div>
 
             <div class="field">
-              <label class="form-label">プロトタイプの画像</label><br />
+              <label class="form-label">プロトタイプの画像</label>
               <input type="file" th:field="*{image}">
             </div>
           </div>
