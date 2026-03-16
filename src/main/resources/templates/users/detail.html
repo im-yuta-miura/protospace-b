@@ -57,7 +57,9 @@
                 <p class="title" th:text="${prototype.title}"></p>
                 <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
               </div>
-              <p class="name" th:text="|by ${user.name}|"></p>
+              <a th:href="@{/users/{id}/mypage(id=${prototype.user_id})}"class="username-link">
+                by <span th:text="${user.name}"></span>
+              </a>
             </div>
           </div>
         </div>

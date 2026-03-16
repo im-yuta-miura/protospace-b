@@ -89,7 +89,7 @@ public class UserController {
     return "redirect:/";
   }
 
-  @GetMapping("/users/{user_id}")
+  @GetMapping("/users/{user_id}/mypage")
   public String showUserDetail(
       @PathVariable("user_id") Integer id,
       Model model
