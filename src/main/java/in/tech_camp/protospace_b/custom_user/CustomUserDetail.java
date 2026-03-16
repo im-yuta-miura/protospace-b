@@ -56,6 +56,10 @@ public class CustomUserDetail implements UserDetails {
     return true;
   }
 
+  public CustomUser getUser() {
+    return user;
+  }
+
   public static CustomUserDetail createFrom(CustomUser user) {
     return new CustomUserDetail(user);
   }
