@@ -10,46 +10,42 @@
   </head>
 
   <body>
-    <th:block th:replace="~{header :: header}"></th:block>
-    <div class="contents">
-      <div class="container">
-        <h2>新規プロトタイプ投稿</h2>
-        
-        <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
-          
-          <div class="field">
-          <label>プロトタイプの名称</label><br />
-          <input type="text" th:field="*{title}">
+  <th:block th:replace="~{header :: header}"></th:block>
+
+  <div class="contents">
+    <h2 class="page-heading">新規プロトタイプ投稿</h2>
+      <div class="wrapper">
+        <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data" class="form-container">
+          <div class="main-field">
+            <div class="field">
+              <label class="form-label">プロトタイプの名称</label><br />
+              <input type="text" th:field="*{title}" class="form-text">
+            </div>
+
+            <div class="field">
+              <label class="form-label">キャッチコピー</label><br />
+              <textarea th:field="*{catchphrase}" class="form-text"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="form-label">コンセプト</label><br />
+              <textarea th:field="*{concept}" class="form-text"></textarea>
+            </div>
+
+            <div class="field">
+              <label class="form-label">プロトタイプの画像</label><br />
+              <input type="file" th:field="*{image}">
+            </div>
           </div>
 
-
-          <div class="field">
-          <label>キャッチコピー</label><br />
-          <textarea th:field="*{catchphrase}"></textarea>
-        
+           <div class="actions">
+            <input type="submit" value="保存する" class="form-btn">
           </div>
+        </div>
 
+      </form>
+  </div>
 
-          <div class="field">
-          <label>コンセプト</label><br />
-          <textarea th:field="*{concept}"></textarea>
-          
-          </div>
-
-
-          <div class="field">
-          <label>プロトタイプの画像</label><br />
-          <input type="file" th:field="*{image}">
-          
-          </div>
-
-
-          <div class="actions">
-          <input type="submit" value="保存する">
-          </div>
-        </form>
-      </div>
-    </div>
-    <th:block th:replace="~{footer :: footer}"></th:block>
-  </body>
+  <th:block th:replace="~{footer :: footer}"></th:block>
+</body>
 </html>
