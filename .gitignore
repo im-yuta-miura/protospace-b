@@ -40,4 +40,6 @@ out/
 # 実行時設定
 !.vscode/launch.json
 
+src/main/resources/static/uploads/**
+!src/main/resources/static/uploads/.gitkeep
 .env*
