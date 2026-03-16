@@ -9,7 +9,7 @@
   <title>Sample</title>
   <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/users/detail.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/users/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body class="body">
   <!-- Frame3 -->
@@ -45,23 +45,12 @@
       </div>
 
       <!-- Frame41 -->
-      <div>
-        <h2>
-          <span th:text="${user.name}"></span>さんのプロトタイプ
-        </h2>
-        <div class="contents">
-          <div th:each="prototype : ${prototypes}" class="content_prototype">
-            <img class="image" th:src="${prototype.image}">
-            <div class="explain">
-              <div class="info">
-                <p class="title" th:text="${prototype.title}"></p>
-                <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
-              </div>
-              <a th:href="@{/users/{id}/mypage(id=${prototype.user_id})}"class="username-link">
-                by <span th:text="${user.name}"></span>
-              </a>
-            </div>
-          </div>
+      <h2>
+        <span th:text="${user.name}"></span>さんのプロトタイプ
+      </h2>
+      <div class="contents">
+        <div th:each="prototype : ${prototypes}" class="content_prototype">
+          <div th:insert="~{prototype :: prototype}"></div>
         </div>
       </div>
     </div>

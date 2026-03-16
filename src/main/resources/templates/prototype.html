@@ -6,6 +6,8 @@
         <p class="title" th:text="${prototype.title}"></p>
         <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
       </div>
-      <p class="name" th:text="|by ${prototype.user.name}|"></p>
+      <p class="name">
+        <a th:href="@{/users/{id}/mypage(id=${prototype.user.id})}" th:text="|by ${prototype.user.name}|"></a>
+      </p>
     </div>
   </div>

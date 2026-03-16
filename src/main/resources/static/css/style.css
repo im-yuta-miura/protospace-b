@@ -329,6 +329,11 @@ body {
   text-align: right;
   color: #999999;
   text-decoration-line: underline;
+  
+  a{
+    /* 親と同じ色にする */
+    color: inherit; 
+  }
 }
 
 .footer{

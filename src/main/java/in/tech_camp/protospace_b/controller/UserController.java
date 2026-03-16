@@ -99,6 +99,7 @@ public class UserController {
     model.addAttribute("user", user);
 
     List<PrototypeEntity> prototypes = prototypeService.getPrototypeByUserId(id);
+
     model.addAttribute("prototypes", prototypes);
 
     return "users/detail";
