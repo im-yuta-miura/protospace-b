@@ -16,14 +16,7 @@
   </div>
   <div class="contents">
     <div th:each="prototype : ${prototypes}" class="content_prototype">
-      <img class="image" th:src="@{${prototype.image}}">
-      <div class="explain">
-        <div class="info">
-          <p class="title" th:text="${prototype.title}"></p>
-          <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
-        </div>
-        <p class="name" th:text="|by ${prototype.user_id}|"></p>
-      </div>
+      <div th:insert="~{prototype :: prototype}"></div>
     </div>
   </div>
 </div>

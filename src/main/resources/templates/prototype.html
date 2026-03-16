@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<div th:fragment="prototype" xmlns:th="http://www.thymeleaf.org"  class="prototype">
+  <img class="image" th:src="${prototype.image}">
+    <div class="explain">
+      <div class="info">
+        <p class="title" th:text="${prototype.title}"></p>
+        <p class="catchphrase" th:text="${prototype.catchphrase}"></p>
+      </div>
+      <p class="name" th:text="|by ${prototype.user.name}|"></p>
+    </div>
+  </div>
