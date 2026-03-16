@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<header th:fragment="prototype" xmlns:th="http://www.thymeleaf.org"  class="prototype">
+<div th:fragment="prototype" xmlns:th="http://www.thymeleaf.org"  class="prototype">
   <img class="image" th:src="${prototype.image}">
     <div class="explain">
       <div class="info">
@@ -8,4 +8,4 @@
       </div>
       <p class="name" th:text="|by ${prototype.user.name}|"></p>
     </div>
-</header>
+  </div>
