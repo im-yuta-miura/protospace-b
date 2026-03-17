@@ -15,9 +15,7 @@ public class PrototypeService {
   private final PrototypeRepository prototypeRepository;
 
   public List<PrototypeEntity> getPrototypeByUserId(Integer userId) {
-    
-    List<PrototypeEntity> prototypes = prototypeRepository.getByUserIdWithUser(userId);
 
-    return prototypes;
+    return prototypeRepository.getByUserIdWithUser(userId);
   }
 }
