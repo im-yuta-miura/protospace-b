@@ -4,6 +4,11 @@
   font-family: "Noto Sans JP", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .contents_row{
   display: flex;
   flex-direction: column;
@@ -42,7 +47,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-    
 }
 
 .proto_title{
@@ -60,7 +64,6 @@
   font-weight: 700; 
   line-height: 1.0;
   color: #3B4043;
-;
 }
 
 .username-link {
@@ -86,7 +89,6 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-
 }
 
 
@@ -150,21 +152,18 @@
   text-decoration: none;
 }
 
-.contents_area{
-  width: 1440px; 
-  height: 859px;
-  padding: 48px 208px;
-  gap: 10px;
-  overflow-y: auto;
+.contents_area {
+  width: 1026px;
+  margin: 0 auto;
+  padding: 48px 0;
+  box-sizing: border-box;
 }
 
 .contents{
-  width: 1026px;
-  height: 730px;
+  width: 100%;
   gap: 27px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -179,6 +178,9 @@
   width: 324px;
   height: 324px;
   background-color: #909090;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
 }
 
 .content_detail{
@@ -199,7 +201,6 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-
 }
 
 .catchphrase_box{
@@ -250,7 +251,6 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-
 }
 
 .concept_more{
@@ -282,7 +282,107 @@
   letter-spacing: 0;
   color: #3B4043;
   height:324px;
-  background-color: #909090;
+}
+
+/*  コメント欄 */
+.comment{
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  gap: 40px;
+  background-color: #F6F6F6;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form{
+  display: flex;
+  flex-direction: column;
+  width: 141px;
+  height: 88px;
+  gap: 10px;
+}
+
+.comment-post{
+  display: flex;
+  flex-direction: column;
+  width: 141px;
+  height: 47px;
+  gap: 5px;
+}
+
+.comment-post p{
+  width: 56px;
+  height: 20px;
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 14px;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color:  #000000;
+}
+
+.comment-text{
+  width: 141px;
+  height: 22px;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border: 1px solid #767676;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.submit-btn{
+  width: 96px;
+  height: 31px;
+  border-radius: 3px;
+  opacity: 1;
+  padding: 5px 20px 6px 20px;
+  background: #87CEFA;
+  box-shadow: 0px 3px 3px 0px #00000024;
+  gap: 10px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+}
+
+
+.comments_list{
+  width: 456px;
+  height: 51px;
+  opacity: 1;
+  gap: 5px;
+
+}
+
+
+.comments_contents{
+  width: 456px;
+  height: 23px;
+  opacity: 1;
+  gap: 6px;
+}
+
+.comment_item p{
+  display: flex; 
+  align-items: center;
+
+}
+
+.comment_item span{
+  width: 446px;
+  height: 23px;
+  opacity: 1;
+  font-family:"Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
 
 .explain{
@@ -322,6 +422,11 @@
   text-align: right;
   color: #999999;
   text-decoration-line: underline;
+  
+  a{
+    /* 親と同じ色にする */
+    color: inherit; 
+  }
 }
 
 .footer{
@@ -336,4 +441,9 @@
 .copyright{
   color: #FFFFFF;
   font-size: 10px;
+}
+
+.title-link {
+  text-decoration: none;
+  color: inherit;
 }
