@@ -112,7 +112,15 @@ public class PrototypeController {
   }
 
   @PostMapping("/prototypes/{prototypeId}/delete")
-  public String deletePrototype(@PathVariable("prototypeId") Integer prototypeId) {
+  public String deletePrototype(@PathVariable("prototypeId") Integer prototypeId,
+                                @AuthenticationPrincipal CustomUserDetail currentUser ) {
+    
+    PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+
+    if (prototype == null || !prototype.getUser_id().equals(currentUser.getId())) {
+      return "redirect:/prototypes/" + prototypeId;
+    }
+
     try {
       prototypeRepository.deleteById(prototypeId);
     } catch (Exception e) {
