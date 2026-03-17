@@ -2,8 +2,9 @@ package in.tech_camp.protospace_b.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Options;
@@ -37,6 +38,9 @@ public interface PrototypeRepository {
   })
   PrototypeEntity findById(Integer id);
 
+  @Delete("DELETE FROM prototypes WHERE id = #{id}")
+  void deleteById(Integer id);
+  
   @Select("SELECT * FROM prototypes WHERE user_id = #{userId}")
   @Results(value = {
     @Result(property = "user", column = "user_id",
