@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <title>Protospace</title>
+</head>
+<body>
+
+<div th:insert="~{header :: header}"></div>
+
+<div class="editForm-contents">
+  <div class="container">
+    <h3>プロトタイプ編集</h3>
+    <div th:if="${errorMessages}" th:each="error : ${errorMessages}">
+      <div th:text="${error}"></div>
+    </div>
+    <form  th:action="@{/prototypes/{prototypeId}/update(prototypeId=${prototypeId})}" class="form" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
+      <div class="form-input">
+        <div class="field">
+          <label class="edit-object">プロトタイプの名称</label>
+          <input type="text" th:field="*{title}" placeholder="Prototype Title" class="text-title" />
+        </div>
+
+        <div class="field">
+          <label class="edit-object">キャッチコピー</label>
+          <input type="text" th:field="*{catchphrase}" placeholder="Prototype Catchphrase" class="text-catchphrase" />
+        </div>
+
+        <div class="field">
+          <label class="edit-object">コンセプト</label>
+          <textarea th:field="*{concept}" placeholder="Prototype Catchphrase" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label class="edit-object">プロトタイプの画像</label>
+          <input type="file" name="image" id="image" class="hidden">
+        </div>
+        
+      </div>
+      <input class="form-submit" type="submit" value="保存する" />
+    </form>
+  </div>
+</div>
+
+<div th:insert="~{footer :: footer}"></div>
+
+</body>
+</html>
