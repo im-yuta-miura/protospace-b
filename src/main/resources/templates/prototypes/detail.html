@@ -34,7 +34,12 @@
             <!-- Frame5 -->
             <a th:href="@{/prototypes/{id}/edit(id=${prototype.id})}" class="edit-btn" >編集する</a>
             <!-- Frame6 -->
+            <form th:action="@{/prototypes/{prototypeId}/delete(prototypeId=${prototype.id})}" th:method="post">
+              <input type="submit" class="delete-btn" value="削除する">
+            </form>
+<!--
             <a th:href="@{/prototypes/{id}/delete(id=${prototype.id})}" class="delete-btn" >削除する</a>
+-->
           </div>
         </div>
         <!-- Frame19 -->
