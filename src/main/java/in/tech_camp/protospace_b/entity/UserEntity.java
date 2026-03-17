@@ -1,6 +1,7 @@
 package in.tech_camp.protospace_b.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +20,6 @@ public class UserEntity {
   private String password;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+  private List<PrototypeEntity> prototypes;
+  private List<CommentEntity> comments;
 }
