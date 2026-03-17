@@ -23,6 +23,7 @@ import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
+import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import in.tech_camp.protospace_b.repository.UserRepository;
@@ -100,11 +101,14 @@ public class PrototypeController {
 
   @GetMapping("/prototypes/{prototypeId}")
   public String showPrototypeDetail(@PathVariable("prototypeId") Integer prototypeId, Model model) {
-      PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
-      UserEntity user = userRepository.findById(prototype.getUser().getId());
-      model.addAttribute("prototype", prototype);
-      model.addAttribute("user", user);
-      
-      return "prototypes/detail";
+
+    PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+    CommentForm commentForm = new CommentForm();
+
+    model.addAttribute("prototype", prototype);
+    model.addAttribute("commentForm", commentForm);
+    model.addAttribute("comments", prototype.getComments());
+    
+    return "prototypes/detail";
   }
 }
