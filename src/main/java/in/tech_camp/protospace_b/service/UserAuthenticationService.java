@@ -24,15 +24,6 @@ public class UserAuthenticationService implements UserDetailsService {
       throw new UsernameNotFoundException("ユーザーが見つかりませんでした。: " + email);
     }
 
-    return CustomUserDetail.createFrom(CustomUser.builder()
-      .id(userEntity.getId())
-      .name(userEntity.getName())
-      .profile(userEntity.getProfile())
-      .affiliation(userEntity.getAffiliation())
-      .position(userEntity.getPosition())
-      .email(userEntity.getEmail())
-      .password(userEntity.getPassword())
-      .build()
-    );
+    return CustomUserDetail.createFrom(CustomUser.fromEntity(userEntity));
   }
 }
