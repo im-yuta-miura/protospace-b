@@ -26,11 +26,11 @@
             <div class="proto_title">
               <p th:text="${prototype.title}"></p>
             </div>
-            <a th:href="@{/users/{id}/mypage(id=${prototype.user.id})}" th:text="by + ${user.name}" class="username-link"></a>
+            <a th:href="@{/users/{id}/mypage(id=${prototype.user.id})}" th:text="by + ${prototype.user.name}" class="username-link"></a>
           </div>
 
           <!-- Frame7 -->
-          <div class="proto_menu" sec:authorize="isAuthenticated()" th:if="${#authentication?.principal.user.id == prototype.user.id}">
+          <div class="under_titles" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id == prototype.user.id}">
             <!-- Frame5 -->
             <a th:href="@{/prototypes/{id}/edit(id=${prototype.id})}" class="edit-btn" >編集する</a>
             <!-- Frame6 -->
@@ -66,6 +66,33 @@
             <div class="concept_text">
               <p th:text="${prototype.concept}"></p>
             </div>
+          </div>
+        </div>
+        <!-- Frame52 -->
+        <div class="comment">
+          <!-- Frame50 -->
+          <form class="comment-form" th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/prototypes/{id}/comment(id=${prototype.id})}" th:method="post" th:object="${commentForm}">
+            <!-- Frame13 -->
+            <div class="comment-post">
+              <p>コメント</p>
+              <input type="text" th:field="*{content}" class="comment-text">
+            </div>
+            <!-- Frame16 -->
+            <div class="submit">
+              <input type="submit" class="submit-btn" value="送信する">
+            </div>
+          </form>
+          <!-- Frame54 -->
+          <div class="comments_list">
+            <!-- Frame51 -->
+            <ul class="comments_contents" th:if="${prototype.comments != null}">
+              <li th:each="comment : ${comments}" class="comment_item">
+                <p>
+                  <span th:text="${comment.content}"></span>
+                  <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="${comment.user.name}" class="username-link"></a>
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
