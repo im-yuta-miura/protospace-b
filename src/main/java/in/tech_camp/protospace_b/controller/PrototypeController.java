@@ -89,7 +89,7 @@ public class PrototypeController {
   }
   
   @GetMapping("/")
-  public String showPrototype(@AuthenticationPrincipal UserEntity user, Model model) {
+  public String showPrototype(@AuthenticationPrincipal CustomUserDetail user, Model model) {
     if (user != null) {
       model.addAttribute("name", user.getName());
     }
