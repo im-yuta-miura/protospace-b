@@ -1,5 +1,73 @@
-.h1 {
-  font-size: 100px;
-  height: 43px;
+.contents {
+  min-height: 859px;
+  width: 100%;
+  padding: 48px 208px;
+  align-items: flex-start;
+  background-color: #FFFFFF;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 28px;
+}
+
+
+.page-heading {
   width: 300px;
+  font-size: 30px;
+  margin: 0;
+}
+
+.wrapper {
+  width: 510px;
+  padding: 30px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.main-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column; 
+  gap: 5px;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.form-text {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #767676;
+  box-sizing: border-box; 
+  border-radius: 2px;
+}
+
+
+.form-btn {
+  background-color: #87CEFA;
+  color: white;
+  border: none;
+  padding: 5px 20px 6px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
 }
