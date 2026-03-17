@@ -27,6 +27,7 @@ public interface PrototypeRepository {
   @Insert("INSERT INTO prototypes (title, catchphrase, concept, image, user_id) VALUES (#{title}, #{catchphrase}, #{concept}, #{image}, #{user_id})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(PrototypeEntity prototype);
+
   @Select("SELECT * FROM prototypes WHERE id = #{id}")
   @Results(value = {
     @Result(property = "id", column = "id"),
@@ -39,5 +40,12 @@ public interface PrototypeRepository {
 
   @Delete("DELETE FROM prototypes WHERE id = #{id}")
   void deleteById(Integer id);
+  
+  @Select("SELECT * FROM prototypes WHERE user_id = #{userId}")
+  @Results(value = {
+    @Result(property = "user", column = "user_id",
+        one = @One(select = "in.tech_camp.protospace_b.repository.UserRepository.findById"))
+  })
+  List<PrototypeEntity> getByUserIdWithUser(Integer userId);
 
 }

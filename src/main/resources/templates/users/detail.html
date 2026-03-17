@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/users/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="body">
+  <!-- Frame3 -->
+  <th:block th:replace="~{header :: header}"></th:block>
+
+  <!-- Frame4 -->
+  <div class="contents_area">
+    <!-- Frame39 -->
+    <div>
+      <h1>
+        <span th:text="${user.name}"></span>さんの情報
+      </h1>
+      <!-- Frame38 -->
+      <div>
+        <table>
+          <tr>
+            <th>名前</th>
+            <td th:text="${user.name}"></td>
+          </tr>
+          <tr>
+            <th>プロフィール</th>
+            <td th:text="${user.profile}"></td>
+          </tr>
+          <tr>
+            <th>所属</th>
+            <td th:text="${user.affiliation}"></td>
+          </tr>
+          <tr>
+            <th>役職</th>
+            <td th:text="${user.position}"></td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Frame41 -->
+      <h2>
+        <span th:text="${user.name}"></span>さんのプロトタイプ
+      </h2>
+      <div class="contents">
+        <div th:each="prototype : ${prototypes}" class="content_prototype">
+          <div th:insert="~{prototype :: prototype}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Frame18 -->
+  <th:block th:replace="~{footer :: footer}"></th:block>
+</body>
+</html>

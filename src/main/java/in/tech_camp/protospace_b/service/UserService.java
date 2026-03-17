@@ -32,4 +32,9 @@ public class UserService {
 
     return user;
   }
+
+  public UserEntity findUserById(Integer id) {
+
+    return userRepository.findById(id);
+  }
 }
