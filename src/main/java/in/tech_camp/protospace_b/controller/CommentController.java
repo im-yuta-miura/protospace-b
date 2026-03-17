@@ -23,26 +23,26 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CommentController {
 
-   private final CommentRepository commentRepository;
+  private final CommentRepository commentRepository;
 
   private final UserRepository userRepository;
 
   private final PrototypeRepository prototypeRepository;
 
   @PostMapping("/prototypes/{prototypeId}/comment")
-    public String createComment(@PathVariable("prototypeId") Integer prototypeId, 
-                            @ModelAttribute("commentForm") @Validated(ValidationOrder.class) CommentForm commentForm,
-                            BindingResult result,
-                            @AuthenticationPrincipal CustomUserDetail currentUser, Model model) {
+  public String createComment(@PathVariable("prototypeId") Integer prototypeId, 
+                              @ModelAttribute("commentForm") @Validated(ValidationOrder.class) CommentForm commentForm,
+                              BindingResult result,
+                              @AuthenticationPrincipal CustomUserDetail currentUser, Model model) {
 
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
 
     if (result.hasErrors()) {
-        model.addAttribute("errorMessages", result.getAllErrors());
-        model.addAttribute("prototype", prototype);
-        model.addAttribute("commentForm", commentForm);
-        model.addAttribute("comments", prototype.getComments());
-        return "prototypes/detail";
+      model.addAttribute("errorMessages", result.getAllErrors());
+      model.addAttribute("prototype", prototype);
+      model.addAttribute("commentForm", commentForm);
+      model.addAttribute("comments", prototype.getComments());
+      return "prototypes/detail";
     }
 
     CommentEntity comment = new CommentEntity();
