@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
-import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
@@ -110,5 +109,16 @@ public class PrototypeController {
     model.addAttribute("comments", prototype.getComments());
     
     return "prototypes/detail";
+  }
+
+  @PostMapping("/prototypes/{prototypeId}/delete")
+  public String deletePrototype(@PathVariable("prototypeId") Integer prototypeId) {
+    try {
+      prototypeRepository.deleteById(prototypeId);
+    } catch (Exception e) {
+      System.out.println("エラー：" + e);
+      return "redirect:/";
+    }
+    return "redirect:/";
   }
 }

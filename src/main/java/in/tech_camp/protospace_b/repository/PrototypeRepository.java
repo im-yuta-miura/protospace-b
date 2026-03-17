@@ -2,13 +2,14 @@ package in.tech_camp.protospace_b.repository;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
@@ -35,5 +36,8 @@ public interface PrototypeRepository {
             many = @Many(select = "in.tech_camp.protospace_b.repository.CommentRepository.findByPrototypeId"))
   })
   PrototypeEntity findById(Integer id);
+
+  @Delete("DELETE FROM prototypes WHERE id = #{id}")
+  void deleteById(Integer id);
 
 }
