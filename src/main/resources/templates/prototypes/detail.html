@@ -89,7 +89,7 @@
               <li th:each="comment : ${comments}" class="comment_item">
                 <p>
                   <span th:text="${comment.content}"></span>
-                  <a th:href="@{/users/{id}/mypage(id=${prototype.user.id})}" th:text="${prototype.user.name}" class="username-link"></a>
+                  <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="${comment.user.name}" class="username-link"></a>
                 </p>
               </li>
             </ul>
