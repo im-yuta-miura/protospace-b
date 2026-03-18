@@ -3,7 +3,6 @@ package in.tech_camp.protospace_b.controller;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.CommentForm;
@@ -33,6 +33,7 @@ import lombok.AllArgsConstructor;
 public class PrototypeController {
   private final PrototypeRepository prototypeRepository;
 
+  private final ImageUrl imageUrl;
 
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
@@ -60,8 +61,7 @@ public class PrototypeController {
         if (imageFile != null && !imageFile.isEmpty()){
             try {
                 // 1. 保存先のパスを作成（アプリ実行フォルダ直下の uploaded-images）
-                String uploadDir = System.getProperty("user.dir") + "/uploaded-images";
-                Path uploadPath = Paths.get(uploadDir);
+                Path uploadPath = imageUrl.getPath();
 
                 // フォルダが存在しなかったら作成する
                 if (!Files.exists(uploadPath)) {
@@ -183,8 +183,8 @@ public class PrototypeController {
     if (imageFile != null && !imageFile.isEmpty()) {
       try {
             // 保存先のディレクトリ作成
-            String uploadDir = System.getProperty("user.dir") + "/uploaded-images";
-            Path uploadPath = Paths.get(uploadDir);
+            Path uploadPath = imageUrl.getPath();
+
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
