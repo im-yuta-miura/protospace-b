@@ -4,6 +4,16 @@
   font-family: "Noto Sans JP", sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .contents_row{
   display: flex;
   flex-direction: column;
@@ -42,7 +52,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-    
 }
 
 .proto_title{
@@ -60,7 +69,6 @@
   font-weight: 700; 
   line-height: 1.0;
   color: #3B4043;
-;
 }
 
 .username-link {
@@ -86,7 +94,6 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-
 }
 
 
@@ -150,21 +157,20 @@
   text-decoration: none;
 }
 
-.contents_area{
-  width: 1440px; 
-  height: 859px;
-  padding: 48px 208px;
-  gap: 10px;
-  overflow-y: auto;
+.contents_area {
+  width: 1026px;
+  margin: 0 auto;
+  padding: 48px 0;
+  box-sizing: border-box;
 }
 
 .contents{
-  width: 1026px;
-  height: 730px;
+  width: 100%;
+  width: 100%;
   gap: 27px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -179,6 +185,12 @@
   width: 324px;
   height: 324px;
   background-color: #909090;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
 }
 
 .content_detail{
@@ -199,7 +211,6 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-
 }
 
 .catchphrase_box{
@@ -250,7 +261,6 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-
 }
 
 .concept_more{
@@ -291,11 +301,8 @@
   padding: 20px;
   gap: 40px;
   background-color: #F6F6F6;
-
   display: flex;
   flex-direction: column;
-
-
 }
 
 .comment-form{
@@ -329,18 +336,12 @@
 .comment-text{
   width: 141px;
   height: 22px;
-
   background-color: #FFFFFF;
   box-sizing: border-box;
-
   border: 1px solid #767676;
   border-radius: 2px;
   margin-bottom: 10px;
- 
 }
-
-
-
 
 .submit-btn{
   width: 96px;
@@ -358,8 +359,6 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #FFFFFF;
-
-
 }
 
 
@@ -377,7 +376,6 @@
   height: 23px;
   opacity: 1;
   gap: 6px;
-
 }
 
 .comment_item p{
@@ -395,14 +393,7 @@
   font-size: 16px;
   line-height: 100%;
   letter-spacing: 0%;
-
-
 }
-
-
-
-
-
 
 .explain{
   width: 324px;
@@ -441,6 +432,11 @@
   text-align: right;
   color: #999999;
   text-decoration-line: underline;
+  
+  a{
+    /* 親と同じ色にする */
+    color: inherit; 
+  }
 }
 
 .footer{
@@ -460,4 +456,73 @@
 .title-link {
   text-decoration: none;
   color: inherit;
+}
+
+.editForm-contents{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: calc(100vh - 77.5px - 34px);
+  padding: 48px 208px;
+}
+
+.form{
+  width: 510px;
+  height: 316px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+textarea{
+  resize: none;
+  width: 510px;
+  height: 42px;
+  border: #767676 solid 1px;
+}
+
+.text-title{
+  width: 151px;
+  height: 22px;
+  padding: 1px 2px 2px 2px;
+  gap: 10px;
+}
+
+.text-catchphrase{
+  width: 510px;
+  height: 42px;
+  padding: 1px 2px 2px 2px;
+  gap: 10px;
+}
+
+.form-input{
+  width: 510px;
+  height: 269px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.edit-object{
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #000000;
+}
+
+.form-submit{
+  width: 96px;
+  height: 31px;
+  padding: 5px 20px 6px;
+  background-color: #87CEFA;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  outline: none;
 }
