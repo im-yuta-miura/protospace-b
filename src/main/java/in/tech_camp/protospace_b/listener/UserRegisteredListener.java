@@ -23,7 +23,6 @@ public class UserRegisteredListener {
 
   @EventListener
   public void handleUserRegisteredEvent(UserRegisteredEvent event) {
-    System.out.println("\tパブリッシャーから呼び出し");
     // RequestとResponseをコンテキストから取得
     ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     
