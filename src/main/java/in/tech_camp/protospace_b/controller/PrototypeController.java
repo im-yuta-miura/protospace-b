@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import in.tech_camp.protospace_b.repository.UserRepository;
+import in.tech_camp.protospace_b.validation.ValidationPriority1;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -35,14 +37,13 @@ public class PrototypeController {
   private final UserRepository userRepository;
 
   private final ImageUrl imageUrl;
+
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
         
         model.addAttribute("prototypeForm", new PrototypeForm());
         return "form";
     }
-  
-  
 
   @PostMapping("/prototypes")
   public String createPrototype(@ModelAttribute("prototypeForm")  @Validated PrototypeForm prototypeForm, BindingResult bindingResult, @AuthenticationPrincipal CustomUserDetail currentUser) {
@@ -92,7 +93,7 @@ public class PrototypeController {
     if (user != null) {
       model.addAttribute("name", user.getName());
     }
-    
+
     List<PrototypeEntity> prototypes = prototypeRepository.findAll();
     model.addAttribute("prototypes",prototypes);
     return "prototypes/index";
@@ -128,5 +129,70 @@ public class PrototypeController {
       return "redirect:/";
     }
     return "redirect:/";
+  }
+  
+  @GetMapping("/prototypes/{prototypeId}/edit")
+  public String editPrototype(@PathVariable("prototypeId") Integer prototypeId, Authentication authentication, Model model) {
+    PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+
+    if (prototype == null) {
+        return "redirect:/";
+    }
+
+    CustomUserDetail userDetail = (CustomUserDetail) authentication.getPrincipal();
+
+    if (!prototype.getUser().getId().equals(userDetail.getId())) {
+        return "redirect:/";
+    }
+
+    PrototypeForm prototypeForm = new PrototypeForm();
+    prototypeForm.setTitle(prototype.getTitle());
+    prototypeForm.setCatchphrase(prototype.getCatchphrase());
+    prototypeForm.setConcept(prototype.getConcept());
+
+    model.addAttribute("prototypeForm", prototypeForm);
+    model.addAttribute("prototypeId", prototypeId);
+
+    return "prototypes/edit";
+  }
+
+  @PostMapping("/prototypes/{prototypeId}/update")
+  public String updatePrototype(@ModelAttribute("prototypeForm") @Validated(ValidationPriority1.class) PrototypeForm prototypeForm,
+                            BindingResult result,
+                            @PathVariable("prototypeId") Integer prototypeId,
+                            Model model) {
+
+    if (result.hasErrors()) {
+      model.addAttribute("prototypeId", prototypeId);
+      return "prototypes/edit";
+    }
+
+    PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+    prototype.setTitle(prototypeForm.getTitle());
+    prototype.setCatchphrase(prototypeForm.getCatchphrase());
+    prototype.setConcept(prototypeForm.getConcept());
+
+    MultipartFile imageFile = prototypeForm.getImage();
+    if (imageFile != null && !imageFile.isEmpty()) {
+      try {
+        String uploadDir = imageUrl.getImageUrl();
+        String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
+        Path imagePath = Paths.get(uploadDir, fileName);
+        Files.copy(imageFile.getInputStream(), imagePath);
+        prototype.setImage("/uploads/" + fileName);
+      } catch (IOException e) {
+        System.out.println("エラー：" + e);
+        return "prototypes/edit";
+      }
+    }
+
+    try {
+      prototypeRepository.update(prototype);
+    } catch (Exception e) {
+      System.out.println("エラー：" + e);
+      return "redirect:/";
+    }
+
+    return "redirect:/prototypes/" + prototypeId;
   }
 }

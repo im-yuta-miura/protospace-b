@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 
@@ -24,7 +25,7 @@ public interface PrototypeRepository {
   })
   List<PrototypeEntity> findAll();
 
-  @Insert("INSERT INTO prototypes (title, catchphrase, concept, image, user_id) VALUES (#{title}, #{catchphrase}, #{concept}, #{image}, #{user_id})")
+  @Insert("INSERT INTO prototypes(title, catchphrase, concept, image, user_id) VALUES (#{title}, #{catchphrase}, #{concept}, #{image}, #{user_id})")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(PrototypeEntity prototype);
 
@@ -48,5 +49,7 @@ public interface PrototypeRepository {
         one = @One(select = "in.tech_camp.protospace_b.repository.UserRepository.findById"))
   })
   List<PrototypeEntity> getByUserIdWithUser(Integer userId);
+  @Update("UPDATE prototypes SET title = #{title}, catchphrase = #{catchphrase}, concept = #{concept}, image = #{image} WHERE id = #{id}")
+  void update(PrototypeEntity prototype);
 
 }
