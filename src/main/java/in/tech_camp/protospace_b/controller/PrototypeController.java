@@ -45,48 +45,59 @@ public class PrototypeController {
         return "form";
     }
 
-  @PostMapping("/prototypes")
-  public String createPrototype(@ModelAttribute("prototypeForm")  @Validated PrototypeForm prototypeForm, BindingResult bindingResult, @AuthenticationPrincipal CustomUserDetail currentUser) {
+      @PostMapping("/prototypes")
+    public String createPrototype(@ModelAttribute("prototypeForm") @Validated PrototypeForm prototypeForm, 
+                                BindingResult bindingResult, 
+                                @AuthenticationPrincipal CustomUserDetail currentUser) {
 
-    if(bindingResult.hasErrors() || prototypeForm.getImage().isEmpty()) {
+        if(bindingResult.hasErrors() || prototypeForm.getImage().isEmpty()) {
+            return "form";
+        }
 
-      return "form";
+        PrototypeEntity prototype = new PrototypeEntity();
+        prototype.setTitle(prototypeForm.getTitle());
+        prototype.setCatchphrase(prototypeForm.getCatchphrase());
+        prototype.setConcept(prototypeForm.getConcept());
+        prototype.setUser_id(currentUser.getId());
+
+        MultipartFile imageFile = prototypeForm.getImage();
+        if (imageFile != null && !imageFile.isEmpty()){
+            try {
+                // 1. 保存先のパスを作成（アプリ実行フォルダ直下の uploaded-images）
+                String uploadDir = System.getProperty("user.dir") + "/uploaded-images";
+                Path uploadPath = Paths.get(uploadDir);
+
+                // フォルダが存在しなかったら作成する
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // 2. ファイル名を生成（日付_元の名前）
+                String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
+                
+                // 3. フォルダの中にファイルを保存
+                Path imagePath = uploadPath.resolve(fileName);
+                Files.copy(imageFile.getInputStream(), imagePath);
+
+                // 4. DBに保存するパスをセット（Webから見えるURLパス）
+                prototype.setImage("/uploads/" + fileName);
+
+            } catch (IOException e) {
+                System.out.println("画像保存エラー:" + e);
+                e.printStackTrace(); 
+                return "form";
+            }
+        }
+
+        try {
+            prototypeRepository.insert(prototype);
+        } catch(Exception e) {
+            System.out.println("データベース保存エラー: " + e);
+            return "form";
+        }
+
+        return "redirect:/";
     }
-
-    PrototypeEntity prototype = new PrototypeEntity();
-
-    prototype.setTitle(prototypeForm.getTitle());
-    prototype.setCatchphrase(prototypeForm.getCatchphrase());
-    prototype.setConcept(prototypeForm.getConcept());
-    
-    prototype.setUser_id(currentUser.getId());
-
-
-    MultipartFile imageFile = prototypeForm.getImage();
-    if (imageFile != null && !imageFile.isEmpty()){
-      try{
-        String uploadDir = imageUrl.getImageUrl();
-        String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
-        Path imagePath = Paths.get(uploadDir, fileName);
-        Files.copy(imageFile.getInputStream(), imagePath);
-        prototype.setImage("/uploads/" + fileName);
-
-      } catch (IOException e) {
-        System.out.println("画像保存エラー:" + e);
-        return "form";
-      }
-    }
-
-  
-    try {
-      prototypeRepository.insert(prototype);
-    } catch(Exception e) {
-      System.out.println("エラー: " + e);
-      return "form";
-    }
-
-    return "redirect:/";
-  }
   
   @GetMapping("/")
   public String showPrototype(@AuthenticationPrincipal CustomUserDetail user, Model model) {
