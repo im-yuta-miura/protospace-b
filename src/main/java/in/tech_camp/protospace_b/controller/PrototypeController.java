@@ -20,13 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
-import in.tech_camp.protospace_b.repository.UserRepository;
 import in.tech_camp.protospace_b.validation.ValidationPriority1;
 import lombok.AllArgsConstructor;
 
@@ -34,9 +32,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PrototypeController {
   private final PrototypeRepository prototypeRepository;
-  private final UserRepository userRepository;
 
-  private final ImageUrl imageUrl;
 
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
@@ -186,15 +182,27 @@ public class PrototypeController {
     MultipartFile imageFile = prototypeForm.getImage();
     if (imageFile != null && !imageFile.isEmpty()) {
       try {
-        String uploadDir = imageUrl.getImageUrl();
-        String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
-        Path imagePath = Paths.get(uploadDir, fileName);
-        Files.copy(imageFile.getInputStream(), imagePath);
-        prototype.setImage("/uploads/" + fileName);
-      } catch (IOException e) {
-        System.out.println("エラー：" + e);
-        return "prototypes/edit";
-      }
+            // 保存先のディレクトリ作成
+            String uploadDir = System.getProperty("user.dir") + "/uploaded-images";
+            Path uploadPath = Paths.get(uploadDir);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            // ファイル名の生成（日付 + 元の名前）
+            String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + "_" + imageFile.getOriginalFilename();
+            
+            // 物理ファイルの保存
+            Path imagePath = uploadPath.resolve(fileName);
+            Files.copy(imageFile.getInputStream(), imagePath);
+
+            // DBに保存するパスを「新しいもの」に更新
+            prototype.setImage("/uploads/" + fileName);
+
+        } catch (IOException e) {
+            System.out.println("画像保存エラー:" + e);
+            return "prototypes/edit";
+        }
     }
 
     try {

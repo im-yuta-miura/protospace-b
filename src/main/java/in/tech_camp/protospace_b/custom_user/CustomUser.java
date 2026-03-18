@@ -1,5 +1,6 @@
 package in.tech_camp.protospace_b.custom_user;
 
+import in.tech_camp.protospace_b.entity.UserEntity;
 import lombok.Builder;
 
 @Builder
@@ -12,5 +13,15 @@ public record CustomUser(
   String email,
   String password
 ) {
-
+  public static CustomUser fromEntity(UserEntity entity) {
+    return CustomUser.builder()
+      .id(entity.getId())
+      .name(entity.getName())
+      .profile(entity.getProfile())
+      .affiliation(entity.getAffiliation())
+      .position(entity.getPosition())
+      .email(entity.getEmail())
+      .password(entity.getPassword())
+      .build();
+}
 }
