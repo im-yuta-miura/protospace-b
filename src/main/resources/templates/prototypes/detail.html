@@ -30,7 +30,7 @@
           </div>
 
           <!-- Frame7 -->
-          <div class="under_titles" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id == prototype.user.id}">
+          <div class="proto_menu" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id == prototype.user.id}">
             <!-- Frame5 -->
             <div th:if="${#authorization.expression('isAuthenticated()') and #authentication?.principal.getId() == prototype.user.id}">
               <a th:href="@{/prototypes/{id}/edit(id=${prototype.id})}" class="edit-btn" >編集する</a>
@@ -93,7 +93,7 @@
               <li th:each="comment : ${comments}" class="comment_item">
                 <p>
                   <span th:text="${comment.content}"></span>
-                  <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="${comment.user.name}" class="username-link"></a>
+                  <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="|（ ${comment.user.name} ）|" class="comment-username-link"></a>
                 </p>
               </li>
             </ul>
