@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.event.UserRegisteredEvent;
@@ -21,6 +22,7 @@ public class UserService {
   /** アプリケーションイベントを発行するためのパブリッシャー */
   private final ApplicationEventPublisher publisher;
 
+  @Transactional
   public UserEntity registerUser(UserEntity userInput) throws EmailAlreadyExistsException {
 
     if(userRepository.existsByEmail(userInput.getEmail())) {

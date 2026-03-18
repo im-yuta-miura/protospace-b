@@ -1,7 +1,7 @@
 package in.tech_camp.protospace_b.listener;
 
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -21,7 +21,7 @@ public class UserRegisteredListener {
 
   private final AuthenticationService authenticationService;
 
-  @EventListener
+  @TransactionalEventListener
   public void handleUserRegisteredEvent(UserRegisteredEvent event) {
     // RequestとResponseをコンテキストから取得
     ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
