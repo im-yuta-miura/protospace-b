@@ -72,7 +72,6 @@ body {
 }
 
 .username-link {
-  display: block;
   width: 100%;
   height: 26px;
   color: #999999;
@@ -85,6 +84,7 @@ body {
   letter-spacing: 0;
   text-decoration: underline;
   text-decoration-style: solid;
+  white-space: nowrap;
 }
 
 .proto_menu {
@@ -114,7 +114,144 @@ body {
   cursor: pointer;
   text-decoration: none;
   opacity: 1;
+  background-color: #FFFFFF;
+  white-space: nowrap;
 }
+
+
+/*  コメント欄 */
+.comment{
+  width: 100%;
+  min-height: 219px;
+  height: auto;
+  padding: 20px;
+  gap: 40px;
+  background-color: #F6F6F6;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form{
+  display: flex;
+  flex-direction: column;
+  width: 141px;
+  height: auto;
+  gap: 10px;
+}
+
+.comment-post{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  gap: 5px;
+}
+
+.comment-post p{
+  width: 56px;
+  height: 20px;
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 14px;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color:  #000000;
+  margin: 0;
+}
+
+.comment-text{
+  width: 100%;
+  height: 22px;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border-width: 1px;
+  border: 1px solid #767676;
+  border-radius: 2px;
+}
+
+.submit-btn{
+  width: 96px;
+  height: 31px;
+  border-radius: 3px;
+  border: none;
+  opacity: 1;
+  padding: 5px 20px 6px 20px;
+  background: #87CEFA;
+  box-shadow: 0px 3px 3px 0px #00000024;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  cursor: pointer;
+
+
+}
+
+
+.comments_list{
+  width: 456px;
+  height: 51px;
+  opacity: 1;
+  gap: 5px;
+
+
+}
+
+
+.comments_contents{
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  gap: 6px;
+  list-style-type: square;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_item{
+  display: list-item;
+}
+
+.comment_item p {
+  display: flex;          /* ★中身を横並びにするのはここ！ */
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;               /* コメントと名前の隙間 */
+  margin: 0;
+}
+
+.comment_item span{
+  width: auto;
+  height: auto;
+  font-family:"Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.comment-username-link {
+  display: inline-block;  /* block から変更（文字の幅だけになる） */
+  width: auto;            /* 100% を解除 */
+  text-align: left;       /* center を解除 */
+  height: auto;           /* 固定高さを解除してスッキリさせる */
+  color: #999999;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: 400; 
+  font-style: normal;
+  text-align: center;
+  line-height: 1.0;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  white-space: nowrap;
+}
+
 
 .header{
   box-sizing: border-box;
@@ -294,106 +431,7 @@ body {
   height:324px;
 }
 
-/*  コメント欄 */
-.comment{
-  width: 100%;
-  height: auto;
-  padding: 20px;
-  gap: 40px;
-  background-color: #F6F6F6;
-  display: flex;
-  flex-direction: column;
-}
 
-.comment-form{
-  display: flex;
-  flex-direction: column;
-  width: 141px;
-  height: 88px;
-  gap: 10px;
-}
-
-.comment-post{
-  display: flex;
-  flex-direction: column;
-  width: 141px;
-  height: 47px;
-  gap: 5px;
-}
-
-.comment-post p{
-  width: 56px;
-  height: 20px;
-  font-family: "Noto Sans JP", sans-serif; 
-  font-size: 14px;
-  font-weight: 400; 
-  font-style: normal;
-  line-height: 1.0;
-  letter-spacing: 0;
-  color:  #000000;
-}
-
-.comment-text{
-  width: 141px;
-  height: 22px;
-  background-color: #FFFFFF;
-  box-sizing: border-box;
-  border: 1px solid #767676;
-  border-radius: 2px;
-  margin-bottom: 10px;
-}
-
-.submit-btn{
-  width: 96px;
-  height: 31px;
-  border-radius: 3px;
-  opacity: 1;
-  padding: 5px 20px 6px 20px;
-  background: #87CEFA;
-  box-shadow: 0px 3px 3px 0px #00000024;
-  gap: 10px;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0%;
-  color: #FFFFFF;
-}
-
-
-.comments_list{
-  width: 456px;
-  height: 51px;
-  opacity: 1;
-  gap: 5px;
-
-}
-
-
-.comments_contents{
-  width: 456px;
-  height: 23px;
-  opacity: 1;
-  gap: 6px;
-}
-
-.comment_item p{
-  display: flex; 
-  align-items: center;
-
-}
-
-.comment_item span{
-  width: 446px;
-  height: 23px;
-  opacity: 1;
-  font-family:"Noto Sans JP", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: 0%;
-}
 
 .explain{
   width: 324px;
