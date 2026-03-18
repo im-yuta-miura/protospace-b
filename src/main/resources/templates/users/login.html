@@ -10,13 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
   <!--  -->
   <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/users/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/users/form.css}" rel="stylesheet" type="text/css">
   <title>ユーザーログインページ</title>
   
 </head>
 <body class="body">
   <th:block th:replace="~{header :: header}"></th:block>
-  <div class="contents_area">
+  <div class="main_container">
     
     <div class="users_module">
 
@@ -24,24 +24,22 @@
 
       <p th:if="${loginError}" class="login-error" th:text="${loginError}"></p>
 
-      <form th:method="post" th:action="@{/login}" class="form">
-        <div class="field_area">
+      <form th:method="post" th:action="@{/login}" class="user_form">
+        <div class="user_field_area">
 
-          <div class="field">
-            <label class="column-title">メールアドレス</label><br />
+          <div class="user_field">
+            <label class="column-title">メールアドレス</label>
             <input type="email" id="email" name="email" autofocus="autofocus" required="required" />
           </div>
 
-          <div class="field">
-            <label class="password">パスワード（6文字以上）</label><br />
+          <div class="user_field">
+            <label class="password">パスワード（6文字以上）</label>
             <input type="password" name="password" required="required" autocomplete="off" />
           </div>
 
         </div>
 
-        <div class="actions">
-          <button class="submit_button" type="submit">ログイン</button>
-        </div>
+        <button class="submit_button" type="submit">ログイン</button>
 
       </form>
 
