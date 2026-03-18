@@ -1,6 +1,7 @@
 .contents {
-  min-height: 859px;
-  width: 100%;
+  box-sizing: border-box;
+  min-height: calc(100vh - 111.5px);
+  width: 1440;
   padding: 48px 208px;
   align-items: flex-start;
   background-color: #FFFFFF;
@@ -11,10 +12,10 @@
   gap: 28px;
 }
 
-
 .page-heading {
   width: 300px;
   font-size: 30px;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -25,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  font-family: "Noto Sans CJK JP";
 }
 
 .form-container {
@@ -52,10 +54,19 @@
   font-weight: 400;
 }
 
+.form-title {
+  width: 141px;
+  height: 22px;
+  padding: 1px 2px 2px 2px ;
+  border: 1px solid #767676;
+  box-sizing: border-box; 
+  border-radius: 2px;
+}
 
 .form-text {
-  width: 100%;
-  padding: 8px;
+  width: 510px;
+  height: 42px;
+  padding: 1px 2px 2px 2px ;
   border: 1px solid #767676;
   box-sizing: border-box; 
   border-radius: 2px;
