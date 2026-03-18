@@ -1,7 +1,7 @@
 .contents {
   box-sizing: border-box;
   min-height: calc(100vh - 111.5px);
-  width: 1440;
+  width: 1440px;
   padding: 48px 208px;
   align-items: flex-start;
   background-color: #FFFFFF;
