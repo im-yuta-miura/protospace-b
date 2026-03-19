@@ -1,0 +1,16 @@
+.contents{
+  width: 100%;
+  width: 100%;
+  gap: 27px;
+  display: flex;
+  justify-content: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.content_prototype{
+  width: 324px;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+}
