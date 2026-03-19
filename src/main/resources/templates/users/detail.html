@@ -47,11 +47,11 @@
       </div>
 
       <!-- Frame41 -->
-      <h2>
-        <span th:text="${user.name}"></span>さんのプロトタイプ
-      </h2>
-      <div class="content_area">
-        <div class="contents">
+      <div class="frame41">
+        <h2 class="user_prototype_heading">
+          <span th:text="${user.name}"></span>さんのプロトタイプ
+        </h2>
+        <div class="user_prototypes_area">
           <div th:each="prototype : ${prototypes}" class="content_prototype">
             <div th:insert="~{prototype :: prototype}"></div>
           </div>
