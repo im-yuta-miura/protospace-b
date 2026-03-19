@@ -21,3 +21,14 @@
   display: flex;
   flex-direction: column;
 }
+
+.welcome_message {
+  font-weight: 400;
+  font-size: 16px;
+  color: #3B4043;
+
+  .login_user_mypage {
+    text-decoration-line: underline;
+    color: inherit;
+  }
+}
