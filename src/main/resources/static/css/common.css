@@ -40,8 +40,6 @@
   text-decoration: none;
 }
 
-
-
 /* フッター */
 .footer{
   box-sizing: border-box;
@@ -62,7 +60,6 @@
   color: inherit;
 }
 
-
 body {
   display: flex;
   flex-direction: column; /* 縦に並べる */
@@ -80,14 +77,23 @@ body {
   align-items: center;
 }
 
-
-
-
 /*  プロトタイプ部分テンプレート */
 .explain{
   width: 324px;
   height: 85px;
   gap: 8px;
+}
+
+.image{
+  width: 324px;
+  height: 324px;
+  background-color: #909090;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
 }
 
 .info{
