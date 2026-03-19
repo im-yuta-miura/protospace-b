@@ -1,0 +1,23 @@
+.contents{
+  width: 100%;
+  width: 100%;
+  gap: 27px;
+  display: flex;
+  justify-content: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.contents_area {
+  width: 1026px;
+  margin: 0 auto;
+  padding: 48px 0;
+  box-sizing: border-box;
+}
+
+.content_prototype{
+  width: 324px;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+}
