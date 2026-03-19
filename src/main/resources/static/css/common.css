@@ -78,58 +78,56 @@ body {
 }
 
 /*  プロトタイプ部分テンプレート */
-.explain{
-  width: 324px;
-  height: 85px;
+.explain {
+  width: 100%; 
+  height: auto;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
+  margin-top: 10px;
 }
 
-.image{
-  width: 324px;
-  height: 324px;
+.prototype-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
   background-color: #909090;
   display: block;
-  object-fit: cover;
-  min-height: 324px;
-  display: block;
-  object-fit: cover;
-  min-height: 324px;
 }
 
-.info{
-  width: 191px;
-  height: 60px;
+.info {
+  width: 100%;
+  height: auto;
   font-family: "Noto Sans CJK JP", sans-serif;
-  gap: 8px;
   color: #3B4043;
 }
 
-.title{
-  width: 140px;
-  height: 29px;
+.title {
+  width: 100%;
   font-weight: 700;
-  font-style: normal;
   font-size: 20px;
+  margin: 0;
 }
 
-.catchphrase{
-  width: 191px;
-  height: 23px;
+.catchphrase {
+  width: 100%;
   font-weight: 400;
   font-size: 16px;
+  margin: 0;
 }
 
-.name{
-  width: 324px;
-  height: 17px;
+.name {
+  width: 100%;
   font-weight: 400;
   font-size: 12px;
-  text-align: right;
-  color: #999999;
-  text-decoration-line: underline;
   
-  a{
-    /* 親と同じ色にする */
-    color: inherit; 
+  text-align: right; 
+  
+  color: #999999;
+  text-decoration: underline;
+  margin-top: 4px;
+
+  a {
+    color: inherit;
   }
 }

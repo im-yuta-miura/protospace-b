@@ -1,51 +1,46 @@
 <!DOCTYPE html>
-<html>
-  
-  <head>
-    <meta charset="UTF-8">
-    <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
+  <title>Protospace</title>
+</head>
+<body>
 
-    <title>Protospace</title>
-  </head>
+<th:block th:replace="~{header :: header}"></th:block>
 
-  <body>
-  <th:block th:replace="~{header :: header}"></th:block>
-
-  <div class="main_container">
-    <div class="wrapper">
-      <h1 class="page-heading">新規プロトタイプ投稿</h1>
-        <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data" class="form-container">
-          <div class="main-field">
-            <div class="field">
-              <label class="form-label">プロトタイプの名称</label>
-              <input type="text" th:field="*{title}" class="form-title">
-            </div>
-
-            <div class="field">
-              <label class="form-label">キャッチコピー</label>
-              <textarea th:field="*{catchphrase}" class="form-text"></textarea>
-            </div>
-
-            <div class="field">
-              <label class="form-label">コンセプト</label>
-              <textarea th:field="*{concept}" class="form-text"></textarea>
-            </div>
-
-            <div class="field">
-              <label class="form-label">プロトタイプの画像</label>
-              <input type="file" th:field="*{image}">
-            </div>
+<div class="main_container">
+  <div class="wrapper">
+    <h1 class="page-heading">新規プロトタイプ投稿</h1>
+      <form th:action="@{/prototypes}" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data" class="form-container">
+        <div class="main-field">
+          <div class="field">
+            <label class="form-label">プロトタイプの名称</label>
+            <input type="text" th:field="*{title}" class="form-title">
           </div>
-
-            <div class="actions">
-              <input type="submit" value="保存する" class="form-btn">
-            </div>
-        </form>
-    </div>
+          <div class="field">
+            <label class="form-label">キャッチコピー</label>
+            <textarea th:field="*{catchphrase}" class="form-text"></textarea>
+          </div>
+          <div class="field">
+            <label class="form-label">コンセプト</label>
+            <textarea th:field="*{concept}" class="form-text"></textarea>
+          </div>
+          <div class="field">
+            <label class="form-label">プロトタイプの画像</label>
+            <input type="file" th:field="*{image}">
+          </div>
+        </div>
+          <div class="actions">
+            <input type="submit" value="保存する" class="form-btn">
+          </div>
+      </form>
   </div>
+</div>
 
-  <th:block th:replace="~{footer :: footer}"></th:block>
+<th:block th:replace="~{footer :: footer}"></th:block>
+
 </body>
 </html>
