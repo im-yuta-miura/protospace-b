@@ -79,7 +79,7 @@ public class PrototypeFormUnitTest {
             
 
             Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form, ValidationPriority1.class);
-            assertEquals(1, violations.size());
-        }
+           assertEquals(1, violations.size());
+       }
     }
 }
