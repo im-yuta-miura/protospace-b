@@ -2,48 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
   <title>Protospace</title>
 </head>
 <body>
 
-<div th:insert="~{header :: header}"></div>
+<th:block th:replace="~{header :: header}"></th:block>
 
-<div class="editForm-contents">
-  <div class="container">
-    <h3>プロトタイプ編集</h3>
+<div class="main_container">
+  <div class="wrapper">
+    <h1 class="page-heading">プロトタイプ編集</h1>
+    
     <div th:if="${errorMessages}" th:each="error : ${errorMessages}">
       <div th:text="${error}"></div>
     </div>
-    <form  th:action="@{/prototypes/{prototypeId}/update(prototypeId=${prototypeId})}" class="form" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
-      <div class="form-input">
+    
+    <form  th:action="@{/prototypes/{prototypeId}/update(prototypeId=${prototypeId})}" class="form-container" th:method="post" th:object="${prototypeForm}" enctype="multipart/form-data">
+      <div class="main-field">
         <div class="field">
-          <label class="edit-object">プロトタイプの名称</label>
-          <input type="text" th:field="*{title}" placeholder="Prototype Title" class="text-title" />
+          <label class="form-label">プロトタイプの名称</label>
+          <input type="text" th:field="*{title}" class="form-title" />
         </div>
 
         <div class="field">
-          <label class="edit-object">キャッチコピー</label>
-          <input type="text" th:field="*{catchphrase}" placeholder="Prototype Catchphrase" class="text-catchphrase" />
+          <label class="form-label">キャッチコピー</label>
+          <textarea th:field="*{catchphrase}" class="form-text"></textarea>
         </div>
 
         <div class="field">
-          <label class="edit-object">コンセプト</label>
-          <textarea th:field="*{concept}" placeholder="Prototype Catchphrase" rows="2"></textarea>
+          <label class="form-label">コンセプト</label>
+          <textarea th:field="*{concept}" class="form-text"></textarea>
         </div>
         <div class="field">
-          <label class="edit-object">プロトタイプの画像</label>
-          <input type="file" name="image" id="image" class="hidden">
+          <label class="form-label">プロトタイプの画像</label>
+          <input type="file" name="image" id="image">
         </div>
-        
       </div>
-      <input class="form-submit" type="submit" value="保存する" />
+      <div class="actions">
+          <input type="submit" value="保存する" class="form-btn">
+        </div>
     </form>
   </div>
 </div>
 
-<div th:insert="~{footer :: footer}"></div>
+<th:block th:replace="~{footer :: footer}"></th:block>
 
 </body>
 </html>
