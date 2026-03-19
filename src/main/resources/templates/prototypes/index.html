@@ -15,7 +15,9 @@
 <div class="main_container">
   <div class="contents_area">
     <div sec:authorize="isAuthenticated()" th:if="${name != null}">
-      <p th:text="${name} + 'さん、こんにちは'"></p>
+      <p class="welcome_message">
+        <a th:href="@{/users/{id}/mypage(id=${#authentication.principal.id})}" th:text="${name}" class="login_user_mypage"></a>さん、こんにちは
+      </p>
     </div>
     <div class="contents">
       <div th:each="prototype : ${prototypes}" class="content_prototype">

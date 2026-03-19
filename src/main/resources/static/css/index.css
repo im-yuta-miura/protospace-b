@@ -16,3 +16,21 @@
   width: calc((100% - 40px) / 3);
   box-sizing: border-box;
 }
+
+.content_prototype{
+  width: 324px;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome_message {
+  font-weight: 400;
+  font-size: 16px;
+  color: #3B4043;
+
+  .login_user_mypage {
+    text-decoration-line: underline;
+    color: inherit;
+  }
+}
