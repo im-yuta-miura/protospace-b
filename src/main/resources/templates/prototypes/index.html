@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
   <title>Protospace</title>
 </head>
 
@@ -10,13 +11,15 @@
 
 <div th:insert="~{header :: header}"></div>
 
-<div class="contents_area">
-  <div sec:authorize="isAuthenticated()" th:if="${name != null}">
-    <p th:text="${name} + 'さん、こんにちは'"></p>
-  </div>
-  <div class="contents">
-    <div th:each="prototype : ${prototypes}" class="content_prototype">
-      <div th:insert="~{prototype :: prototype}"></div>
+<div class="main_container">
+  <div class="contents_area">
+    <div sec:authorize="isAuthenticated()" th:if="${name != null}">
+      <p th:text="${name} + 'さん、こんにちは'"></p>
+    </div>
+    <div class="contents">
+      <div th:each="prototype : ${prototypes}" class="content_prototype">
+        <div th:insert="~{prototype :: prototype}"></div>
+      </div>
     </div>
   </div>
 </div>
