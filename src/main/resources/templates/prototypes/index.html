@@ -12,12 +12,14 @@
 <div th:insert="~{header :: header}"></div>
 
 <div class="main_container">
-  <div sec:authorize="isAuthenticated()" th:if="${name != null}">
-    <p th:text="${name} + 'さん、こんにちは'"></p>
-  </div>
-  <div class="contents">
-    <div th:each="prototype : ${prototypes}" class="content_prototype">
-      <div th:insert="~{prototype :: prototype}"></div>
+  <div class="contents_area">
+    <div sec:authorize="isAuthenticated()" th:if="${name != null}">
+      <p th:text="${name} + 'さん、こんにちは'"></p>
+    </div>
+    <div class="contents">
+      <div th:each="prototype : ${prototypes}" class="content_prototype">
+        <div th:insert="~{prototype :: prototype}"></div>
+      </div>
     </div>
   </div>
 </div>

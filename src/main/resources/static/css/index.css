@@ -8,6 +8,13 @@
   flex-wrap: wrap;
 }
 
+.contents_area {
+  width: 1026px;
+  margin: 0 auto;
+  padding: 48px 0;
+  box-sizing: border-box;
+}
+
 .content_prototype{
   width: 324px;
   height: 425px;
