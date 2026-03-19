@@ -13,7 +13,9 @@
   }
 
   .frame39{
+    display: flex;
     gap: 28px;
+    flex-direction: column;
   }
 
   .user_detail_row {
@@ -32,5 +34,25 @@
       background-color: #FFFFFF;
       padding: 16px 8px 16px 8px;
     }
+  }
+
+  .frame41 {
+    display: flex;
+    gap: 28px;
+    flex-direction: column;
+  }
+
+  .user_prototype_heading{ 
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  .user_prototypes_area {
+    width: 100%;
+    gap: 27px;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }
