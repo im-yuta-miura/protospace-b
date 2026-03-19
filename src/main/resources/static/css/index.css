@@ -18,10 +18,8 @@
 }
 
 .content_prototype{
-  width: 324px;
-  height: 425px;
-  display: flex;
-  flex-direction: column;
+  width: calc((100% - 40px) / 3);
+  box-sizing: border-box;
 }
 
 .welcome_message {
