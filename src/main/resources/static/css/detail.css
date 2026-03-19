@@ -1,9 +1,6 @@
-/*  プロトタイプ詳細ページ */
-
 *{
   font-family: "Noto Sans JP", sans-serif;
 }
-
 
 .contents_row{
   display: flex;
@@ -87,7 +84,6 @@
   gap: 8px;
 }
 
-
 .edit-btn, .delete-btn {
   width: 88px;
   height: 28px;
@@ -108,7 +104,6 @@
   background-color: #FFFFFF;
   white-space: nowrap;
 }
-
 
 .contents_area {
   width: 1026px;
@@ -193,7 +188,7 @@
 }
 
 .catchphrase_text{
-  width: 100%;           /* 255pxから変更 */
+  width: 100%;
   max-width: 600px; 
   height: auto;
 }
@@ -205,7 +200,7 @@
   line-height: 1.0;
   letter-spacing: 0;
   color: #3B4043;
-  word-break: break-all; /* ★ どこでも改行できるようにする */
+  word-break: break-all;
 }
 
 .concept_box{
@@ -235,9 +230,9 @@
 }
 
 .concept_text{
-  width: 100%;           /* 1024pxから変更 */
+  width: 100%;
   height: auto;
-  min-height: 46px;          /* ★ 46px から変更 */
+  min-height: 46px;
 }
 
 .concept_text p{
@@ -247,10 +242,8 @@
   line-height: 1.0;
   letter-spacing: 0;
   color: #3B4043;
-  word-break: break-all; /* ★ どこでも改行できるようにする */
+  word-break: break-all;
 }
-
-
 
 /*  コメント欄 */
 .comment{
@@ -319,20 +312,14 @@
   letter-spacing: 0%;
   color: #FFFFFF;
   cursor: pointer;
-
-
 }
-
 
 .comments_list{
   width: 456px;
   height: auto;
   opacity: 1;
   gap: 5px;
-
-
 }
-
 
 .comments_contents{
   width: 100%;
@@ -350,10 +337,10 @@
 }
 
 .comment_item p {
-  display: flex;          /* ★中身を横並びにするのはここ！ */
+  display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 8px;               /* コメントと名前の隙間 */
+  gap: 8px;
   margin: 0;
 }
 
@@ -368,10 +355,10 @@
 }
 
 .comment-username-link {
-  display: inline-block;  /* block から変更（文字の幅だけになる） */
-  width: auto;            /* 100% を解除 */
-  text-align: left;       /* center を解除 */
-  height: auto;           /* 固定高さを解除してスッキリさせる */
+  display: inline-block;
+  width: auto;
+  text-align: left;
+  height: auto;
   color: #999999;
   font-family: "Noto Sans JP", sans-serif;
   font-size: 16px;
