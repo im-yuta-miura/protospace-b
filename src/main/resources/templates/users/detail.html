@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
   <!--  -->
+  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/users/detail.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
 </head>
@@ -56,7 +57,7 @@
         <h2 class="user_prototype_heading">
           <span th:text="${user.name}"></span>さんのプロトタイプ
         </h2>
-        <div class="user_prototypes_area">
+        <div class="contents">
           <div th:each="prototype : ${prototypes}" class="content_prototype">
             <div th:insert="~{prototype :: prototype}"></div>
           </div>

@@ -27,20 +27,23 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+	runtimeOnly 'org.postgresql:postgresql'
+  // flyway
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.flywaydb:flyway-database-postgresql'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
-	compileOnly 'org.projectlombok:lombok:1.18.44'
-	runtimeOnly 'org.postgresql:postgresql'
+  // lombok
 	annotationProcessor 'org.projectlombok:lombok:1.18.44'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	compileOnly 'org.projectlombok:lombok:1.18.44'
 	// Spring Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	// バリデーション
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+  // JUnit
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
 	// JUnit H2
 	testImplementation 'com.h2database:h2'
 	// JUnit Faker
@@ -48,6 +51,7 @@ dependencies {
 	implementation 'com.github.javafaker:javafaker:1.0.2'
 	// Jsoup
   testImplementation 'org.jsoup:jsoup:1.15.3'
+  
 }
 
 tasks.named('test') {
