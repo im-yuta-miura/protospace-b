@@ -9,12 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
   <!--  -->
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/users/form.css}" rel="stylesheet" type="text/css">
   <title>ユーザーログインページ</title>
   
 </head>
-<body class="body">
+<body>
   <th:block th:replace="~{header :: header}"></th:block>
   <div class="main_container">
     
@@ -42,7 +42,6 @@
         <button class="submit_button" type="submit">ログイン</button>
 
       </form>
-
     </div>
   </div>
   <th:block th:replace="~{footer :: footer}"></th:block>

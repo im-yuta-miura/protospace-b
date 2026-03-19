@@ -10,62 +10,64 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
   <!--  -->
-  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/users/form.css}" rel="stylesheet" type="text/css">
 </head>
-<body class="body">
+<body>
   <th:block th:replace="~{header :: header}"></th:block>
-  <div class="main_container users_module">
+  <div class="main_container">
 
-    <h1 class="heading">ユーザー新規登録</h1>
-    
-    <ul th:if="${errorMessages != null and !errorMessages.empty}">
-      <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
-    </ul>
+    <div class="users_module">
+      
+      <h1 class="heading">ユーザー新規登録</h1>
+      
+      <ul th:if="${errorMessages != null and !errorMessages.empty}">
+        <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
+      </ul>
 
-    <form th:action="@{/user}" th:method="post" th:object="${userForm}" class="user_form">
+      <form th:action="@{/user}" th:method="post" th:object="${userForm}" class="user_form">
 
-      <div class="user_field_area">
-        <div class="user_field">
-          <label for="email">メールアドレス</label>
-          <input type="email" id="email" th:field="*{email}"  autofocus="autofocus"/>
-        </div>
+        <div class="user_field_area">
+          <div class="user_field">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" th:field="*{email}"  autofocus="autofocus"/>
+          </div>
 
-        <div class="user_field">
-          <label for="password">パスワード（6文字以上）</label>
-          <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
-        </div>
+          <div class="user_field">
+            <label for="password">パスワード（6文字以上）</label>
+            <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
+          </div>
 
-        <div class="user_field">
-          <label for="passwordConfirmation">パスワード再入力</label>
-          <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
-        </div>
+          <div class="user_field">
+            <label for="passwordConfirmation">パスワード再入力</label>
+            <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
+          </div>
 
-        <div class="user_field">
-          <label for="name">ユーザー名</label>
-          <input type="text" id="name" th:field="*{name}"  autofocus="autofocus" />
-        </div>
+          <div class="user_field">
+            <label for="name">ユーザー名</label>
+            <input type="text" id="name" th:field="*{name}"  autofocus="autofocus" />
+          </div>
 
-        <div class="user_field">
-          <label for="profile">プロフィール</label>
-          <textarea id="profile" th:field="*{profile}"></textarea>
+          <div class="user_field">
+            <label for="profile">プロフィール</label>
+            <textarea id="profile" th:field="*{profile}"></textarea>
+          </div>
+          
+          <div class="user_field">
+            <label for="affiliation">所属</label>
+            <textarea id="affiliation" th:field="*{affiliation}"></textarea>
+          </div>
+
+          <div class="user_field">
+            <label for="position">役職</label>
+            <textarea id="position" th:field="*{position}"></textarea>
+          </div>
         </div>
         
-        <div class="user_field">
-          <label for="affiliation">所属</label>
-          <textarea id="affiliation" th:field="*{affiliation}"></textarea>
-        </div>
-
-        <div class="user_field">
-          <label for="position">役職</label>
-          <textarea id="position" th:field="*{position}"></textarea>
-        </div>
-      </div>
-      
-      <button class="submit_button" type="submit">新規登録</button>
-    </form>
+        <button class="submit_button" type="submit">新規登録</button>
+      </form>
+    </div>
   </div>
-  
   <th:block th:replace="~{footer :: footer}"></th:block>
 </body>
 </html>

@@ -1,0 +1,36 @@
+.users_module {
+  
+  padding: 48px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .heading{
+    font-size: 30px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .frame39{
+    gap: 28px;
+  }
+
+  .user_detail_row {
+    min-height: 55px;
+    
+    .user_detail_header {
+      width: 135px;
+      border: 1px solid #F5F5F5;
+      background-color: #FAFAFA;
+      padding: 8px;
+    }
+
+    .user_detail_data {
+      width: 377px;
+      border: 1px solid #F5F5F5;
+      background-color: #FFFFFF;
+      padding: 16px 8px 16px 8px;
+    }
+  }
+}

@@ -1,5 +1,8 @@
 /* 外に影響が無いようにusers_moduleクラスに閉じ込める */
 .users_module{
+
+  padding: 48px 0;
+  width: 100%;
   
   .heading{
     font-size: 30px;
