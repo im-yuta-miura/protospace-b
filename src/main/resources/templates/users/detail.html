@@ -9,6 +9,7 @@
   <title>Sample</title>
   <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
   <link th:href="@{/css/users/detail.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -51,7 +52,7 @@
         <h2 class="user_prototype_heading">
           <span th:text="${user.name}"></span>さんのプロトタイプ
         </h2>
-        <div class="user_prototypes_area">
+        <div class="contents">
           <div th:each="prototype : ${prototypes}" class="content_prototype">
             <div th:insert="~{prototype :: prototype}"></div>
           </div>
