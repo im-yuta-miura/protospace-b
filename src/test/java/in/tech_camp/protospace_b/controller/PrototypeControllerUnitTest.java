@@ -15,6 +15,7 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
@@ -78,7 +79,7 @@ public class PrototypeControllerUnitTest {
 
   @Test
     public void 詳細機能にリクエストするとレスポンスにコメントフォームが存在する() {
-      // 準備：コントローラーが途中で落ちないようにプロトタイプを準備する
+      // 準備：コントローラーが途中で落ちないようにプロトタイプを準備
       PrototypeEntity dummyPrototype = new PrototypeEntity();
       dummyPrototype.setComments(new ArrayList<>()); // getComments()で落ちないように
       when(prototypeRepository.findById(1)).thenReturn(dummyPrototype);
@@ -128,4 +129,10 @@ public class PrototypeControllerUnitTest {
       // ② 元の詳細ページへリダイレクトされることを確認
       assertThat(result, is("redirect:/prototypes/100"));
   }
+      // 2. 実行
+      prototypeController.showPrototypeDetail(1, model); 
+      
+      // 3. 検証：インスタンスそのものを比べるのではなく「CommentFormクラスのデータが入っているか」を確認
+      assertThat(model.getAttribute("commentForm"), is(instanceOf(CommentForm.class)));
+    }
 }
