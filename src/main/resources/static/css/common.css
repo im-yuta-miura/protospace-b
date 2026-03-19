@@ -1,8 +1,35 @@
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+html {
+  overflow-y: overlay;
+  scrollbar-gutter: stable; /* スクロールバー用のスペースを常に確保する */
+  /* 背景（トラック）を透明にする */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  /* つまみ（ハンドル）のデザイン */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3); /* 半透明にする */
+    border-radius: 10px;
+    border: 2px solid transparent; /* 余白を作って浮いているように見せる */
+    background-clip: content-box;  /* 背景をコンテンツ内に収める */
+  }
+
+}
+
 /* ヘッダー */
 .header{
   box-sizing: border-box;
   height: 77.5px;
-  width: 100%;
+  width: 100vw;
   background-color: #F1F8FE;
   display: flex;
   justify-content: space-between;
@@ -44,7 +71,7 @@
 .footer{
   box-sizing: border-box;
   height: 34px;
-  width: 100%;
+  width: 100vw;
   padding: 10px;
   background-color: #999999;
   text-align: center;
