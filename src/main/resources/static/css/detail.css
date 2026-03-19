@@ -1,0 +1,386 @@
+/*  プロトタイプ詳細ページ */
+
+*{
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+
+.contents_row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: auto;
+  min-height: 939px;
+  padding: 48px 0;
+  gap: 16px;
+  background-color: #FFFFFF;
+}
+
+.content_post{
+  width: 324px;
+  height: 445px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.proto_name {
+  width: 100%;
+  height: 105px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.proto_titles {
+  width: 100%;
+  height: 61px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.proto_title{
+  width: 168px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.proto_title p {
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 24px;
+  font-weight: 700; 
+  line-height: 1.0;
+  color: #3B4043;
+}
+
+.username-link {
+  width: 100%;
+  height: 26px;
+  color: #999999;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 18px;
+  font-weight: 400; 
+  font-style: normal;
+  text-align: center;
+  line-height: 1.0;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  white-space: nowrap;
+}
+
+.proto_menu {
+  width: 184px;
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.edit-btn, .delete-btn {
+  width: 88px;
+  height: 28px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 20px 6px 20px;
+  border: 1px solid #999999;
+  border-radius: 3px;
+  color: #999999;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 1;
+  background-color: #FFFFFF;
+  white-space: nowrap;
+}
+
+
+.contents_area {
+  width: 1026px;
+  margin: 0 auto;
+  padding: 48px 0;
+  box-sizing: border-box;
+}
+
+.contents{
+  width: 100%;
+  width: 100%;
+  gap: 27px;
+  display: flex;
+  justify-content: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.content_prototype{
+  width: 324px;
+  height: 425px;
+  display: flex;
+  flex-direction: column;
+}
+
+.image{
+  width: 324px;
+  height: 324px;
+  background-color: #909090;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
+  display: block;
+  object-fit: cover;
+  min-height: 324px;
+}
+
+.content_detail{
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.post-text{
+  width: 100%;
+  max-width: 1024px;
+  height: 135px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.catchphrase_box{
+  width: 100%;
+  min-height: 52px;
+  height: auto;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.catchphrase_more{
+  width: 140px;
+  height: 29px;
+}
+
+.catchphrase_more p {
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 20px;
+  font-weight: 700; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: #3B4043;
+}
+
+.catchphrase_text{
+  width: 100%;           /* 255pxから変更 */
+  max-width: 600px; 
+  height: auto;
+}
+
+.catchphrase_text p{
+  font-size: 16px;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: #3B4043;
+  word-break: break-all; /* ★ どこでも改行できるようにする */
+}
+
+.concept_box{
+  width: 100%;
+  max-width: 1024px;
+  min-height: 75px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.concept_more{
+  width: 100px;
+  height: 29px;
+}
+
+.concept_more p{
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 20px;
+  font-weight: 700; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: #3B4043;
+}
+
+.concept_text{
+  width: 100%;           /* 1024pxから変更 */
+  height: auto;
+  min-height: 46px;          /* ★ 46px から変更 */
+}
+
+.concept_text p{
+  font-size: 16px;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color: #3B4043;
+  word-break: break-all; /* ★ どこでも改行できるようにする */
+}
+
+
+
+/*  コメント欄 */
+.comment{
+  width: 100%;
+  min-height: 219px;
+  height: auto;
+  padding: 20px;
+  gap: 40px;
+  background-color: #F6F6F6;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form{
+  display: flex;
+  flex-direction: column;
+  width: 141px;
+  height: auto;
+  gap: 10px;
+}
+
+.comment-post{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  gap: 5px;
+}
+
+.comment-post p{
+  width: 56px;
+  height: 20px;
+  font-family: "Noto Sans JP", sans-serif; 
+  font-size: 14px;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.0;
+  letter-spacing: 0;
+  color:  #000000;
+  margin: 0;
+}
+
+.comment-text{
+  width: 100%;
+  height: 22px;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  border-width: 1px;
+  border: 1px solid #767676;
+  border-radius: 2px;
+}
+
+.submit-btn{
+  width: 96px;
+  height: 31px;
+  border-radius: 3px;
+  border: none;
+  opacity: 1;
+  padding: 5px 20px 6px 20px;
+  background: #87CEFA;
+  box-shadow: 0px 3px 3px 0px #00000024;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  cursor: pointer;
+
+
+}
+
+
+.comments_list{
+  width: 456px;
+  height: auto;
+  opacity: 1;
+  gap: 5px;
+
+
+}
+
+
+.comments_contents{
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  gap: 6px;
+  list-style-type: square;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment_item{
+  display: list-item;
+}
+
+.comment_item p {
+  display: flex;          /* ★中身を横並びにするのはここ！ */
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;               /* コメントと名前の隙間 */
+  margin: 0;
+}
+
+.comment_item span{
+  width: auto;
+  height: auto;
+  font-family:"Noto Sans JP", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.comment-username-link {
+  display: inline-block;  /* block から変更（文字の幅だけになる） */
+  width: auto;            /* 100% を解除 */
+  text-align: left;       /* center を解除 */
+  height: auto;           /* 固定高さを解除してスッキリさせる */
+  color: #999999;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: 400; 
+  font-style: normal;
+  text-align: center;
+  line-height: 1.0;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  white-space: nowrap;
+}
