@@ -72,7 +72,7 @@ public class PrototypeControllerUnitTest {
 
     // --- プロトタイプ一覧表示showPrototypeのテスト ---
     @Test
-    public void 投稿一覧にリクエストするとツイート一覧表示のビューファイルがレスポンスで返ってくる() {
+    public void 投稿一覧にリクエストするとプロトタイプ一覧表示のビューファイルがレスポンスで返ってくる() {
         String result = prototypeController.showPrototype(null, model);
         assertThat(result, is("prototypes/index"));
     }
