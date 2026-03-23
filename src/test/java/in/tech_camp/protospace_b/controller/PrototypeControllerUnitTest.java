@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.io.TempDir;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import org.mockito.InjectMocks;
@@ -55,6 +56,10 @@ public class PrototypeControllerUnitTest {
     public void setUp() {
         model = new ExtendedModelMap();
     }
+
+    @TempDir
+    
+    Path tempDir;
 
     // --- 1. 表示機能のテスト ---
 
@@ -115,7 +120,7 @@ public class PrototypeControllerUnitTest {
         BindingResult bindingResult = mock(BindingResult.class);
         when(bindingResult.hasErrors()).thenReturn(false);
 
-        when(imageUrl.getPath()).thenReturn(Path.of("test-uploads"));
+        when(imageUrl.getPath()).thenReturn(tempDir);
 
         String result = prototypeController.createPrototype(form, bindingResult, currentUser);
 
