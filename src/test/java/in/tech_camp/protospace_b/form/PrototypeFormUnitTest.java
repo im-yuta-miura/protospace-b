@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import in.tech_camp.protospace_b.factory.PrototypeFormFactory;
+import in.tech_camp.protospace_b.validation.ValidationPriority1;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -35,7 +36,7 @@ public class PrototypeFormUnitTest {
             PrototypeForm prototypeForm = PrototypeFormFactory.createPrototypeForm();
             
             
-            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(prototypeForm);
+            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(prototypeForm, ValidationPriority1.class);
             
             
             assertTrue(violations.isEmpty());
@@ -49,7 +50,7 @@ public class PrototypeFormUnitTest {
             PrototypeForm form = PrototypeFormFactory.createPrototypeForm();
             form.setTitle(""); 
             
-            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form);
+            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form, ValidationPriority1.class);
             assertEquals(1, violations.size()); 
         }
 
@@ -58,7 +59,7 @@ public class PrototypeFormUnitTest {
             PrototypeForm form = PrototypeFormFactory.createPrototypeForm();
             form.setCatchphrase(""); 
             
-            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form);
+            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form, ValidationPriority1.class);
             assertEquals(1, violations.size());
         }
 
@@ -67,7 +68,7 @@ public class PrototypeFormUnitTest {
             PrototypeForm form = PrototypeFormFactory.createPrototypeForm();
             form.setConcept(""); 
             
-            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form);
+            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form, ValidationPriority1.class);
             assertEquals(1, violations.size());
         }
 
@@ -76,8 +77,9 @@ public class PrototypeFormUnitTest {
             PrototypeForm form = PrototypeFormFactory.createPrototypeForm();
             form.setImage(null);
             
-            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form);
-            assertEquals(1, violations.size());
-        }
+
+            Set<ConstraintViolation<PrototypeForm>> violations = validator.validate(form, ValidationPriority1.class);
+           assertEquals(1, violations.size());
+       }
     }
 }
