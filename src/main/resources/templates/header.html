@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <header th:fragment="header" xmlns:th="http://www.thymeleaf.org"  class="header">
   
-  <img th:src="@{/images/logo.png}" class="logo">
+  <a th:href="@{/}">
+    <img th:src="@{/images/logo.png}" class="logo">
+  </a>
 
   <!-- ログイン時に表示される -->
   <div class="nav" th:if="${#authorization.expression('isAuthenticated()')}">
