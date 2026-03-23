@@ -1,7 +1,10 @@
 package in.tech_camp.protospace_b.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
@@ -22,6 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -30,6 +34,8 @@ import org.springframework.validation.BindingResult;
 import in.tech_camp.protospace_b.ImageUrl;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
+import in.tech_camp.protospace_b.entity.UserEntity;
+import in.tech_camp.protospace_b.factory.EditFormFactory;
 import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
@@ -47,6 +53,13 @@ public class PrototypeControllerUnitTest {
     @Mock
     private CustomUserDetail currentUser; // フィールドで一括管理
 
+    @Mock
+    private Authentication authentication;
+
+    @TempDir
+    
+    Path tempDir;
+
     @InjectMocks
     private PrototypeController prototypeController;
 
@@ -57,9 +70,133 @@ public class PrototypeControllerUnitTest {
         model = new ExtendedModelMap();
     }
 
-    @TempDir
+    // --- プロトタイプ一覧表示showPrototypeのテスト ---
+    @Test
+    public void 投稿一覧にリクエストするとツイート一覧表示のビューファイルがレスポンスで返ってくる() {
+        String result = prototypeController.showPrototype(null, model);
+        assertThat(result, is("prototypes/index"));
+    }
+
+    @Test
+    public void 投稿一覧機能にリクエストするとレスポンスに投稿済みのプロトタイプがすべて含まれること() {
+        List<PrototypeEntity> mockList = new ArrayList<>();
+        mockList.add(new PrototypeEntity());
+        when(prototypeRepository.findAll()).thenReturn(mockList);
+
+        prototypeController.showPrototype(null, model);
+
+        assertThat(model.getAttribute("prototypes"), is(mockList));
+    }
+
+    /// --- プロトタイプ編集機能editPrototypeのテスト ---
+    @Test
+    public void 編集画面にアクセスすると本人であれば編集フォームが返ってくる() {
+        Integer prototypeId = 1;
+        PrototypeEntity mockPrototype = new PrototypeEntity();
+        mockPrototype.setId(prototypeId);
+        mockPrototype.setTitle("タイトル");
+
+        UserEntity owner = new UserEntity();
+        owner.setId(100);
+        mockPrototype.setUser(owner);
+
+        when(prototypeRepository.findById(prototypeId)).thenReturn(mockPrototype);
+
+        CustomUserDetail mockUserDetail = mock(CustomUserDetail.class);
+        when(mockUserDetail.getId()).thenReturn(100);
+        when(authentication.getPrincipal()).thenReturn(mockUserDetail);
+
+        String result = prototypeController.editPrototype(prototypeId, authentication, model);
+
+        assertThat(result, is("prototypes/edit"));
+        assertThat(model.containsAttribute("prototypeForm"), is(true));
+        assertThat(model.getAttribute("prototypeId"), is(prototypeId));
+    }
+
+    @Test
+    public void 投稿が存在しない場合はトップページにリダイレクトされる() {
+        Integer prototypeId = 999;
+        when(prototypeRepository.findById(prototypeId)).thenReturn(null);
+        String result = prototypeController.editPrototype(prototypeId, authentication, model);
+        assertThat(result, is("redirect:/"));
+    }
+
+    @Test
+    public void 他人の投稿の編集画面にアクセスするとトップページにリダイレクトされる() {
+        // Given: 投稿者はID:100、ログインユーザーはID:200
+        Integer prototypeId = 1;
+        PrototypeEntity mockPrototype = new PrototypeEntity();
+        UserEntity owner = new UserEntity();
+        owner.setId(100);
+        mockPrototype.setUser(owner);
+        when(prototypeRepository.findById(prototypeId)).thenReturn(mockPrototype);
+        CustomUserDetail mockUserDetail = mock(CustomUserDetail.class);
+        when(mockUserDetail.getId()).thenReturn(200);
+        when(authentication.getPrincipal()).thenReturn(mockUserDetail);
+        String result = prototypeController.editPrototype(prototypeId, authentication, model);
+        assertThat(result, is("redirect:/"));
+      }
     
-    Path tempDir;
+    /// --- プロトタイプ編集機能updatePrototypeのテスト ---
+    @Test
+    public void バリデーションエラーがある場合は編集画面が返ってくる() {
+        Integer prototypeId = 1;
+        PrototypeForm form = EditFormFactory.createPrototype();
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(true);
+
+        String result = prototypeController.updatePrototype(form, bindingResult, prototypeId, model);
+
+        assertThat(result, is("prototypes/edit"));
+        assertThat(model.getAttribute("prototypeId"), is(prototypeId));
+        verify(prototypeRepository, times(0)).update(any());
+    }
+
+    @Test
+    public void 画像がない場合は画像更新なしでリダイレクトされる() throws IOException {
+        Integer prototypeId = 1;
+        PrototypeForm form = EditFormFactory.createPrototype();
+        form.setImage(null);
+
+        PrototypeEntity existingEntity = new PrototypeEntity();
+        existingEntity.setId(prototypeId);
+        when(prototypeRepository.findById(prototypeId)).thenReturn(existingEntity);
+
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(false);
+
+        String result = prototypeController.updatePrototype(form, bindingResult, prototypeId, model);
+
+        assertThat(result, is("redirect:/prototypes/" + prototypeId));
+        verify(prototypeRepository, times(1)).update(existingEntity);
+    }
+
+    @Test
+    public void 画像がある場合はファイル保存とDB更新が行われる() throws IOException {
+        Integer id = 1;
+        PrototypeForm form = EditFormFactory.createPrototype();
+
+        PrototypeEntity existingEntity = new PrototypeEntity();
+        existingEntity.setId(id);
+        when(prototypeRepository.findById(id)).thenReturn(existingEntity);
+    
+        BindingResult bindingResult = mock(BindingResult.class);
+        when(bindingResult.hasErrors()).thenReturn(false);
+    
+        tempDir = Files.createTempDirectory("test-uploads");
+        when(imageUrl.getPath()).thenReturn(tempDir);
+    
+        String result = prototypeController.updatePrototype(form, bindingResult, id, model);
+    
+        assertThat(result, is("redirect:/prototypes/" + id));
+        assertThat(existingEntity.getTitle(), is(form.getTitle()));
+        assertThat(existingEntity.getImage().startsWith("/uploads/"), is(true));
+        verify(prototypeRepository, times(1)).update(existingEntity);
+    
+        Files.walk(tempDir).map(Path::toFile).forEach(java.io.File::delete);
+    }
+
+    
 
     // --- 1. 表示機能のテスト ---
 
