@@ -159,6 +159,11 @@ body {
   }
 }
 
+.search-result-header{
+  margin-top: 50px;
+  text-align: center;
+}
+
 .search-form{
   display: flex;
   align-items: center;
