@@ -24,6 +24,7 @@ import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
+import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import in.tech_camp.protospace_b.validation.ValidationPriority1;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,12 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PrototypeController {
   private final PrototypeRepository prototypeRepository;
-
   private final ImageUrl imageUrl;
+
+  @ModelAttribute("searchForm")
+  public SearchForm setUpSearchForm() {
+      return new SearchForm();
+  }
 
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
@@ -231,5 +236,13 @@ public class PrototypeController {
     }
 
     return "redirect:/prototypes/" + prototypeId;
+  }
+
+  @GetMapping("/prototypes/search")
+  public String searchPrototypes(@ModelAttribute("searchForm") SearchForm searchForm, Model model) {
+    List<PrototypeEntity> prototypes = prototypeRepository.findByTextContaining(searchForm.getTitle());
+    model.addAttribute("prototypes", prototypes);
+    model.addAttribute("searchForm", searchForm);
+    return "prototypes/search";
   }
 }

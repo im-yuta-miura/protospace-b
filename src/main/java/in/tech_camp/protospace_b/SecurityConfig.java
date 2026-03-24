@@ -35,7 +35,8 @@ public class SecurityConfig {
                 "/user",
                 "/prototypes/{id:[0-9]+}",
                 "/users/{id:[0-9]+}/mypage",
-                "/error/**"
+                "/error/**",
+                "/prototypes/search"
                 ).permitAll()
                 
             .requestMatchers(HttpMethod.POST, "/user").permitAll()

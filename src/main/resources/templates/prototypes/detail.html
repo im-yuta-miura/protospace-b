@@ -42,7 +42,8 @@
             </div>
             <!-- Frame6 -->
             <form th:action="@{/prototypes/{prototypeId}/delete(prototypeId=${prototype.id})}" th:method="post">
-              <input type="submit" class="delete-btn" value="削除する">
+              <input type="submit" class="delete-btn" value="削除する"
+                onclick="return confirm('本当に削除してもよろしいですか？\nこの操作は取り消せません。');">
             </form>
           </div>
         </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.exception.EmailAlreadyExistsException;
+import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.form.UserForm;
 import in.tech_camp.protospace_b.service.PrototypeService;
 import in.tech_camp.protospace_b.service.UserService;
@@ -28,6 +29,11 @@ public class UserController {
 
   private final UserService userService;
   private final PrototypeService prototypeService;
+
+  @ModelAttribute("searchForm")
+  public SearchForm setUpSearchForm() {
+      return new SearchForm();
+  }
 
   @GetMapping("/users/login")
   public String showLogin(){
