@@ -1,12 +1,31 @@
+/* error.css */
+
 .error-wrapper {
   text-align: center;
+  /* 🌟 margin-top を 150px くらいにして、ヘッダーの下に無理やり引きずり出す */
+  margin-top: 150px; 
   padding: 50px;
+  /* 🌟 枠線をつけて、どこに要素があるか見えるようにする */
+  border: 2px solid #ff6b6b; 
+  background-color: #fffaf0; /* ほんのり背景色 */
 }
 
-.error-wrapper h1{
+.error-wrapper h1 {
+  font-size: 80px;
   color: #333;
+  margin-bottom: 10px;
 }
 
-.error-wrapper h2{
-  color: #333;
+/* 🌟 h2 ではなく p に対して指定する */
+.error-wrapper p {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.back-home {
+  display: inline-block;
+  color: #000;
+  text-decoration: underline;
+  font-weight: bold;
 }
