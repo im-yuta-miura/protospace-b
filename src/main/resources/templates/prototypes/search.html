@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!--  -->
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <!--  -->
+  <link th:href="@{/css/index.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+  <title>Protospace</title>
+</head>
+
+<body>
+
+<div th:insert="~{header :: header}"></div>
+
+<div class="main_container">
+  <div class="search-result-header">
+      <h2 th:text="|「${searchForm.title}」の検索結果|"></h2>
+      <p th:if="${prototypes.isEmpty()}">該当するプロトタイプは見つかりませんでした。</p>
+  </div>
+
+  <div class="contents_area">
+    <div class="contents">
+      <div th:each="prototype : ${prototypes}" class="content_prototype">
+        <div th:replace="~{prototype :: prototype(prototype=${prototype})}"></div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div th:insert="~{footer :: footer}"></div>
+
+</body>
+</html>

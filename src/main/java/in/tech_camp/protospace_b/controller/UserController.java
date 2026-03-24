@@ -18,6 +18,7 @@ import in.tech_camp.protospace_b.entity.PositionEntity;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.exception.EmailAlreadyExistsException;
+import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.form.UserForm;
 import in.tech_camp.protospace_b.service.AffiliationService;
 import in.tech_camp.protospace_b.service.PositionService;
@@ -35,6 +36,11 @@ public class UserController {
 
   private final AffiliationService affiliationService;
   private final PositionService positionService;
+  
+  @ModelAttribute("searchForm")
+  public SearchForm setUpSearchForm() {
+      return new SearchForm();
+  }
 
   @GetMapping("/users/login")
   public String showLogin(){
