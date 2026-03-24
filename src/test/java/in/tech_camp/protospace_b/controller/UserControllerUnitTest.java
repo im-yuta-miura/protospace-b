@@ -126,8 +126,8 @@ public class UserControllerUnitTest {
       form.setPasswordConfirmation("p@ssw0rd");
       form.setName("testName");
       form.setProfile("testProfile");
-      form.setAffiliation("testAffiliation");
-      form.setPosition("testPosition");
+      form.setAffiliationId("testAffiliation");
+      form.setPositionId("testPosition");
 
       String result = userController.createUser(form, bindingResult, model);
 

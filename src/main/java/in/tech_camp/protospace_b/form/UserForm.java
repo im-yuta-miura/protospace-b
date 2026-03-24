@@ -22,11 +22,11 @@ public class UserForm {
 
   /** 所属 */
   @NotBlank(message = "所属は必須です", groups = ValidationPriority1.class)
-  private String affiliation;
+  private String affiliationId;
 
   /** 役職 */
   @NotBlank(message = "役職は必須です", groups = ValidationPriority1.class)
-  private String position;
+  private String positionId;
 
   /** メール */
   @NotBlank(message = "メールアドレスは必須です", groups = ValidationPriority1.class)

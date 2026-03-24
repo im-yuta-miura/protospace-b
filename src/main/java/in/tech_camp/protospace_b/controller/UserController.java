@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.tech_camp.protospace_b.entity.AffiliationEntity;
+import in.tech_camp.protospace_b.entity.PositionEntity;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.exception.EmailAlreadyExistsException;
 import in.tech_camp.protospace_b.form.UserForm;
+import in.tech_camp.protospace_b.service.AffiliationService;
+import in.tech_camp.protospace_b.service.PositionService;
 import in.tech_camp.protospace_b.service.PrototypeService;
 import in.tech_camp.protospace_b.service.UserService;
 import in.tech_camp.protospace_b.validation.ValidationOrder;
@@ -28,6 +32,9 @@ public class UserController {
 
   private final UserService userService;
   private final PrototypeService prototypeService;
+
+  private final AffiliationService affiliationService;
+  private final PositionService positionService;
 
   @GetMapping("/users/login")
   public String showLogin(){
@@ -46,7 +53,17 @@ public class UserController {
   public String signUp(
       Model model
   ) {
-    model.addAttribute("userForm", new UserForm());
+    UserForm form = new UserForm();
+    form.setAffiliationId("");
+    form.setPositionId("");
+    model.addAttribute("userForm", form);
+
+    List<PositionEntity> positions = positionService.getPositionOptions();
+    model.addAttribute("positions", positions);
+
+    List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+    model.addAttribute("affiliations", affiliations);
+
     return "users/signUp";
   }
 
@@ -72,8 +89,8 @@ public class UserController {
     UserEntity user = new UserEntity();
     user.setName(userForm.getName());
     user.setProfile(userForm.getProfile());
-    user.setAffiliation(userForm.getAffiliation());
-    user.setPosition(userForm.getPosition());
+    user.setAffiliation(userForm.getAffiliationId());
+    user.setPosition(userForm.getPositionId());
     user.setEmail(userForm.getEmail());
     user.setPassword(userForm.getPassword());
 
