@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.tech_camp.protospace_b.entity.AffiliationEntity;
 import in.tech_camp.protospace_b.exception.AffiliationAlreadyExistsException;
 import in.tech_camp.protospace_b.service.AffiliationService;
 import lombok.AllArgsConstructor;
@@ -19,13 +20,15 @@ public class AffiliationController {
   
   private final AffiliationService affiliationService;
 
-  @PostMapping("/")
-  public ResponseEntity<Void> createAffiliations(
+  @PostMapping
+  public ResponseEntity<AffiliationEntity> createAffiliations(
       @RequestBody String requestAffiliation
   ) {
     
     try {
-      affiliationService.createAffiliations(requestAffiliation);
+      AffiliationEntity entity = affiliationService.createAffiliations(requestAffiliation);
+      
+      return ResponseEntity.ok(entity);
 
     } catch (AffiliationAlreadyExistsException e) {
 
@@ -34,7 +37,5 @@ public class AffiliationController {
           .build();
     }
 
-    return ResponseEntity.ok()
-        .build();
   }
 }

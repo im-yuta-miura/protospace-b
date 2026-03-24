@@ -15,6 +15,10 @@ public class AffiliationService {
 
   private final AffiliationRepository affiliationRepository;
 
+  public AffiliationEntity getAffiliation(Integer id) {
+    return affiliationRepository.findById(id);
+  }
+
   public List<AffiliationEntity> getAffiliationOptions () {
     
     return affiliationRepository.findAll();

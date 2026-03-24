@@ -15,6 +15,9 @@ public class PositionService {
 
   private final PositionRepository positionRepository;
 
+  public PositionEntity getPosition(Integer id) {
+    return positionRepository.findById(id);
+  }
   
   public List<PositionEntity> getPositionOptions () {
     

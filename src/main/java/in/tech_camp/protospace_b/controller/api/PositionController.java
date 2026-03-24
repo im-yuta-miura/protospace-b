@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.tech_camp.protospace_b.entity.PositionEntity;
 import in.tech_camp.protospace_b.exception.PositionAlreadyExistsException;
 import in.tech_camp.protospace_b.service.PositionService;
 import lombok.AllArgsConstructor;
@@ -19,13 +20,16 @@ public class PositionController {
   
   private final PositionService positionService;
 
-  @PostMapping("/")
-  public ResponseEntity<Void> createPositions(
+  @PostMapping
+  public ResponseEntity<PositionEntity> createPositions(
       @RequestBody String requestPosition
   ) {
     
     try {
-      positionService.createPositions(requestPosition);
+      var entity = positionService.createPositions(requestPosition);
+
+      return ResponseEntity.ok()
+          .body(entity);
 
     } catch (PositionAlreadyExistsException e) {
 
@@ -34,7 +38,5 @@ public class PositionController {
           .build();
     }
 
-    return ResponseEntity.ok()
-        .build();
   }
 }

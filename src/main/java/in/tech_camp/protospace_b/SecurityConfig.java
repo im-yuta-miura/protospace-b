@@ -21,6 +21,10 @@ public class SecurityConfig {
     http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+            .requestMatchers(HttpMethod.POST, 
+              "/user",
+              "/api/affiliations",
+              "/api/positions").permitAll()
             .requestMatchers(
                 "/css/**",
                 "/images/**",
@@ -32,7 +36,6 @@ public class SecurityConfig {
                 "/prototypes/{id:[0-9]+}",
                 "/users/{id:[0-9]+}/mypage"
                 ).permitAll()
-            .requestMatchers(HttpMethod.POST, "/user").permitAll()
             .anyRequest().authenticated())
         .formLogin(login -> login
             .loginProcessingUrl("/login")

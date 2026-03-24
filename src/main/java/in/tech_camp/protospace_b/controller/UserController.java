@@ -54,8 +54,8 @@ public class UserController {
       Model model
   ) {
     UserForm form = new UserForm();
-    form.setAffiliationId("");
-    form.setPositionId("");
+    form.setAffiliationId(0);
+    form.setPositionId(0);
     model.addAttribute("userForm", form);
 
     List<PositionEntity> positions = positionService.getPositionOptions();
@@ -83,14 +83,21 @@ public class UserController {
 
       model.addAttribute("errorMessages", errorMessages);
       model.addAttribute("userForm", userForm);
+
+      List<PositionEntity> positions = positionService.getPositionOptions();
+      model.addAttribute("positions", positions);
+
+      List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+      model.addAttribute("affiliations", affiliations);
+
       return "users/signUp";
     }
 
     UserEntity user = new UserEntity();
     user.setName(userForm.getName());
     user.setProfile(userForm.getProfile());
-    user.setAffiliation(userForm.getAffiliationId());
-    user.setPosition(userForm.getPositionId());
+    user.setAffiliationId(userForm.getAffiliationId());
+    user.setPositionId(userForm.getPositionId());
     user.setEmail(userForm.getEmail());
     user.setPassword(userForm.getPassword());
 
@@ -100,6 +107,13 @@ public class UserController {
       List<String> emailError = List.of("メールアドレスは登録済みです。");
       model.addAttribute("errorMessages", emailError);
       model.addAttribute("userForm", userForm);
+
+      List<PositionEntity> positions = positionService.getPositionOptions();
+      model.addAttribute("positions", positions);
+
+      List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+      model.addAttribute("affiliations", affiliations);
+
       return "users/signUp";
     }
 
@@ -114,6 +128,9 @@ public class UserController {
 
     UserEntity user = userService.findUserById(id);
     model.addAttribute("user", user);
+
+    model.addAttribute("affiliation", affiliationService.getAffiliation(user.getAffiliationId()));
+    model.addAttribute("position", positionService.getPosition(user.getPositionId()));
 
     List<PrototypeEntity> prototypes = prototypeService.getPrototypeByUserId(id);
 

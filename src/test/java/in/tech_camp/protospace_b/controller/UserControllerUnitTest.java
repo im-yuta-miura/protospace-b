@@ -126,8 +126,8 @@ public class UserControllerUnitTest {
       form.setPasswordConfirmation("p@ssw0rd");
       form.setName("testName");
       form.setProfile("testProfile");
-      form.setAffiliationId("testAffiliation");
-      form.setPositionId("testPosition");
+      form.setAffiliationId(1);
+      form.setPositionId(1);
 
       String result = userController.createUser(form, bindingResult, model);
 
@@ -151,8 +151,8 @@ public class UserControllerUnitTest {
       user.setPassword("testPassword");
       user.setEmail("test@example.com");
       user.setProfile("testProfile");
-      user.setAffiliation("testAffiliation");
-      user.setPosition("testPosition");
+      user.setAffiliationId(1);
+      user.setPositionId(1);
       when(userService.findUserById(1)).thenReturn(user);
 
       var proto1 = new PrototypeEntity();
