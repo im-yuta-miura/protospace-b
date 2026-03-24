@@ -82,4 +82,4 @@ public class PrototypeFormUnitTest {
            assertEquals(1, violations.size());
        }
     }
-}
+  }

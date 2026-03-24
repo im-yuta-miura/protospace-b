@@ -96,6 +96,11 @@ public class UserController {
   ) {
 
     UserEntity user = userService.findUserById(id);
+
+    if (user == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
+    }
+    
     model.addAttribute("user", user);
 
     List<PrototypeEntity> prototypes = prototypeService.getPrototypeByUserId(id);
