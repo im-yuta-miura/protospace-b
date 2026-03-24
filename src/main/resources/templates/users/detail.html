@@ -31,6 +31,12 @@
         </h1>
         <!-- Frame38 -->
         <div>
+          <div class="user_menu" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.id == user.id}">
+            <!-- Frame5 -->
+            <div th:if="${#authorization.expression('isAuthenticated()') and #authentication?.principal.getId() == user.id}">
+              <a th:href="@{/users/{id}/edit(id=${user.id})}" class="edit-btn" >編集する</a>
+            </div>
+          </div>
           <table>
             <tr class="user_detail_row">
               <th class="user_detail_header">名前</th>
