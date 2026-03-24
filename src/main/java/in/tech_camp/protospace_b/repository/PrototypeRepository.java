@@ -49,6 +49,7 @@ public interface PrototypeRepository {
         one = @One(select = "in.tech_camp.protospace_b.repository.UserRepository.findById"))
   })
   List<PrototypeEntity> getByUserIdWithUser(Integer userId);
+  
   @Update("UPDATE prototypes SET title = #{title}, catchphrase = #{catchphrase}, concept = #{concept}, image = #{image} WHERE id = #{id}")
   void update(PrototypeEntity prototype);
 

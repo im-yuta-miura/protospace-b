@@ -55,4 +55,21 @@
     justify-content: flex-start;
     flex-wrap: wrap;
   }
+
+  .edit-btn {
+    width: 88px;
+    height: 28px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #999999;
+    border-radius: 3px;
+    color: #999999;
+    font-size: 12px;
+    text-decoration: none;
+    background-color: #FFFFFF;
+    white-space: nowrap;
+    margin-bottom: 15px;
+  }
 }
