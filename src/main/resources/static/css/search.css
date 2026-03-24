@@ -1,3 +1,8 @@
+.search-result-header{
+  margin-top: 50px;
+  text-align: center;
+}
+
 .contents_area {
   width: 100%;
   padding: 48px 0;
@@ -15,15 +20,4 @@
 .content_prototype{
   width: calc((100% - 40px) / 3);
   box-sizing: border-box;
-}
-
-.welcome_message {
-  font-weight: 400;
-  font-size: 16px;
-  color: #3B4043;
-
-  .login_user_mypage {
-    text-decoration-line: underline;
-    color: inherit;
-  }
 }

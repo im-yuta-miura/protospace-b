@@ -158,3 +158,28 @@ body {
     color: inherit;
   }
 }
+
+.search-form{
+  display: flex;
+  align-items: center;
+}
+
+.search-input{
+  margin-right: 10px;
+  background-color: #f5f8fc;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 15px;
+  color: #999999;
+}
+
+.search-btn{
+  background-color: #87CEFA;
+  color: white;
+  height: 30px;
+  border: none;
+  padding: 5px 20px 6px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
