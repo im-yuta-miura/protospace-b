@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コメント編集 | Protospace</title>
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <link th:href="@{/css/detail.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+</head>
+  
+<body class="body">
+
+  <th:block th:replace="~{header :: header}"></th:block>
+
+  <div class="main_container">
+    <div class="edit_contents_wrapper">
+      <div class="edit_card">
+        <h2 class="page-heading">コメントの編集</h2>
+
+        <form class="edit-form" th:action="@{/comments/{id}/update(id=${commentId})}" th:method="post" th:object="${commentForm}">
+          <div class="comment-post">
+            <input type="text" th:field="*{content}" class="comment-text" placeholder="コメントを入力してください">
+            <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error-message"></div>
+          </div>
+
+          <div class="submit-btns">
+            <input type="submit" class="submit-btn" value="更新する">
+            <a th:if="${prototype != null}" th:href="@{/prototypes/{id}(id=${prototype.id})}" class="cancel-btn">キャンセル</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <th:block th:replace="~{footer :: footer}"></th:block>
+
+</body>
+</html>
