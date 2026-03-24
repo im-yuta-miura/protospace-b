@@ -5,6 +5,11 @@
     <img th:src="@{/images/logo.png}" class="logo">
   </a>
 
+  <form th:action="@{/prototypes/search}" method="get" th:object="${searchForm}" class="search-form">
+    <input type="text" th:field="*{title}" name="title" placeholder="キーワードを入力" class="search-input" />
+    <input type="submit" class="search-btn" value="検索" />
+  </form>
+
   <!-- ログイン時に表示される -->
   <div class="nav" th:if="${#authorization.expression('isAuthenticated()')}">
     <form th:action="@{/logout}" method="post">

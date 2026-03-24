@@ -30,7 +30,8 @@ public class SecurityConfig {
                 "/users/login",
                 "/user",
                 "/prototypes/{id:[0-9]+}",
-                "/users/{id:[0-9]+}/mypage"
+                "/users/{id:[0-9]+}/mypage",
+                "/prototypes/search"
                 ).permitAll()
             .requestMatchers(HttpMethod.POST, "/user").permitAll()
             .anyRequest().authenticated())

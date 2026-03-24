@@ -17,11 +17,6 @@
   box-sizing: border-box;
 }
 
-.content_prototype{
-  width: calc((100% - 40px) / 3);
-  box-sizing: border-box;
-}
-
 .welcome_message {
   font-weight: 400;
   font-size: 16px;
