@@ -100,6 +100,15 @@
                 <p>
                   <span th:text="${comment.content}"></span>
                   <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="|（ ${comment.user.name} ）|" class="comment-username-link"></a>
+                  
+                  <div th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.id == comment.user.id}" class="comment-manage-btns">
+                    <a th:href="@{/comments/{id}/edit(id=${comment.id})}" class="edit-btn">編集する</a>
+                    <form th:action="@{/comments/{id}/delete(id=${comment.id})}" th:method="post" style="display: inline;">
+                      <input type="submit" class="delete-btn" value="削除する"
+                        onclick="return confirm('本当に削除してもよろしいですか？\nこの操作は取り消せません。');">
+                    </form>
+                  </div>
+               
                 </p>
               </li>
             </ul>

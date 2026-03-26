@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -21,10 +23,7 @@ public class SecurityConfig {
     http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-            .requestMatchers(HttpMethod.POST, 
-              "/user",
-              "/api/affiliations",
-              "/api/positions").permitAll()
+            .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
             .requestMatchers(
                 "/css/**",
                 "/images/**",
@@ -35,9 +34,12 @@ public class SecurityConfig {
                 "/user",
                 "/prototypes/{id:[0-9]+}",
                 "/users/{id:[0-9]+}/mypage",
+                "/error/**",
                 "/prototypes/search"
                 ).permitAll()
-            .anyRequest().authenticated())
+            .requestMatchers(HttpMethod.POST, "/user").permitAll()
+            .requestMatchers("/prototypes/new", "/prototypes/*/edit", "/prototypes/*/delete").authenticated()
+            .anyRequest().permitAll())
         .formLogin(login -> login
             .loginProcessingUrl("/login")
             .loginPage("/users/login")

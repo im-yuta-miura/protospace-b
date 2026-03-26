@@ -115,6 +115,11 @@ public class PrototypeController {
   public String showPrototypeDetail(@PathVariable("prototypeId") Integer prototypeId, Model model) {
 
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+    
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
+    }
+    
     CommentForm commentForm = new CommentForm();
 
     model.addAttribute("prototype", prototype);
@@ -130,9 +135,13 @@ public class PrototypeController {
     
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
 
-    if (prototype == null || !prototype.getUser_id().equals(currentUser.getId())) {
-      return "redirect:/prototypes/" + prototypeId;
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
     }
+
+    if (!prototype.getUser_id().equals(currentUser.getId())) {
+    return "redirect:/prototypes/" + prototypeId;
+}
 
     try {
       prototypeRepository.deleteById(prototypeId);
@@ -148,7 +157,7 @@ public class PrototypeController {
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
 
     if (prototype == null) {
-        return "redirect:/";
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
     }
 
     CustomUserDetail userDetail = (CustomUserDetail) authentication.getPrincipal();
@@ -180,6 +189,15 @@ public class PrototypeController {
     }
 
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
+    }
+    
+    if (!prototype.getUser_id().equals(((CustomUserDetail) org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId())) {
+    return "redirect:/prototypes/" + prototypeId;
+    }
+
     prototype.setTitle(prototypeForm.getTitle());
     prototype.setCatchphrase(prototypeForm.getCatchphrase());
     prototype.setConcept(prototypeForm.getConcept());

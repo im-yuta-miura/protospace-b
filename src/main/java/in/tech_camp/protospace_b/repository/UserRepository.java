@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import in.tech_camp.protospace_b.entity.UserEntity;
 
@@ -31,4 +32,9 @@ public interface UserRepository {
 
   @Select("SELECT * FROM users WHERE id = #{id} LIMIT 1")
   UserEntity findById(Integer id);
+
+  @Update("UPDATE users SET name = #{name}, email = #{email}, profile = #{profile}, " +
+        "affiliation = #{affiliation}, position = #{position}, " +
+        "updated_at = NOW() WHERE id = #{id}")
+  void update(UserEntity user);
 }
