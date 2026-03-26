@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.tech_camp.protospace_b.entity.AffiliationEntity;
+import in.tech_camp.protospace_b.entity.PositionEntity;
 import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
@@ -21,6 +23,8 @@ import in.tech_camp.protospace_b.exception.EmailAlreadyExistsException;
 import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.form.UserEditForm;
 import in.tech_camp.protospace_b.form.UserForm;
+import in.tech_camp.protospace_b.service.AffiliationService;
+import in.tech_camp.protospace_b.service.PositionService;
 import in.tech_camp.protospace_b.repository.UserRepository;
 import in.tech_camp.protospace_b.service.PrototypeService;
 import in.tech_camp.protospace_b.service.UserService;
@@ -35,6 +39,9 @@ public class UserController {
   private final PrototypeService prototypeService;
   private final UserRepository userRepository;
 
+  private final AffiliationService affiliationService;
+  private final PositionService positionService;
+  
   @ModelAttribute("searchForm")
   public SearchForm setUpSearchForm() {
       return new SearchForm();
@@ -57,7 +64,17 @@ public class UserController {
   public String signUp(
       Model model
   ) {
-    model.addAttribute("userForm", new UserForm());
+    UserForm form = new UserForm();
+    form.setAffiliationId(0);
+    form.setPositionId(0);
+    model.addAttribute("userForm", form);
+
+    List<PositionEntity> positions = positionService.getPositionOptions();
+    model.addAttribute("positions", positions);
+
+    List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+    model.addAttribute("affiliations", affiliations);
+
     return "users/signUp";
   }
 
@@ -77,14 +94,21 @@ public class UserController {
 
       model.addAttribute("errorMessages", errorMessages);
       model.addAttribute("userForm", userForm);
+
+      List<PositionEntity> positions = positionService.getPositionOptions();
+      model.addAttribute("positions", positions);
+
+      List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+      model.addAttribute("affiliations", affiliations);
+
       return "users/signUp";
     }
 
     UserEntity user = new UserEntity();
     user.setName(userForm.getName());
     user.setProfile(userForm.getProfile());
-    user.setAffiliation(userForm.getAffiliation());
-    user.setPosition(userForm.getPosition());
+    user.setAffiliationId(userForm.getAffiliationId());
+    user.setPositionId(userForm.getPositionId());
     user.setEmail(userForm.getEmail());
     user.setPassword(userForm.getPassword());
 
@@ -94,6 +118,13 @@ public class UserController {
       List<String> emailError = List.of("メールアドレスは登録済みです。");
       model.addAttribute("errorMessages", emailError);
       model.addAttribute("userForm", userForm);
+
+      List<PositionEntity> positions = positionService.getPositionOptions();
+      model.addAttribute("positions", positions);
+
+      List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+      model.addAttribute("affiliations", affiliations);
+
       return "users/signUp";
     }
 
@@ -113,6 +144,9 @@ public class UserController {
     }
     
     model.addAttribute("user", user);
+
+    model.addAttribute("affiliation", affiliationService.getAffiliation(user.getAffiliationId()));
+    model.addAttribute("position", positionService.getPosition(user.getPositionId()));
 
     List<PrototypeEntity> prototypes = prototypeService.getPrototypeByUserId(id);
 

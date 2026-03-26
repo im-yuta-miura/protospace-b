@@ -17,9 +17,9 @@ public interface UserRepository {
   List<UserEntity> findAll();
 
   @Insert("INSERT INTO users ("
-    + "  name, profile, affiliation, position, email, password"
+    + "  name, profile, affiliation_id, position_id, email, password"
     + ") VALUES ("
-    + "  #{name}, #{profile}, #{affiliation}, #{position}, #{email}, #{password}"
+    + "  #{name}, #{profile}, #{affiliationId}, #{positionId}, #{email}, #{password}"
     + ")")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(UserEntity user);

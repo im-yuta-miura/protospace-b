@@ -55,12 +55,32 @@
           
           <div class="user_field">
             <label for="affiliation">所属</label>
-            <textarea id="affiliation" th:field="*{affiliation}"></textarea>
+            <div>
+              <select th:field="*{affiliationId}" id="affiliationSelect">
+                <option value="0" disabled>所属を選択してください</option>
+                <option
+                  th:each="affiliation : ${affiliations}"
+                  th:value="${affiliation.id}"
+                  th:text="${affiliation.affiliation}">
+                </option>
+              </select>
+              <button type="button" id="addAffiliationBtn">所属追加</button>
+            </div>
           </div>
 
           <div class="user_field">
             <label for="position">役職</label>
-            <textarea id="position" th:field="*{position}"></textarea>
+            <div>
+              <select th:field="*{positionId}" id="positionSelect">
+                <option value="0" disabled>役職を選択してください</option>
+                <option
+                  th:each="position : ${positions}"
+                  th:value="${position.id}"
+                  th:text="${position.position}">
+                </option>
+              </select>
+              <button type="button" id="addPositionBtn">役職追加</button>
+            </div>
           </div>
         </div>
         
@@ -68,6 +88,142 @@
       </form>
     </div>
   </div>
+  <th:block th:replace="~{affiliation :: affiliationDialog}"></th:block>
+  <th:block th:replace="~{position :: positionDialog}"></th:block>
   <th:block th:replace="~{footer :: footer}"></th:block>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      document.getElementById("addAffiliationBtn").addEventListener('click', (e) => {
+        e.preventDefault();
+        const dialog = document.getElementById("affiliationDialog");
+        dialog.showModal();
+      });
+
+      document.getElementById("addPositionBtn").addEventListener('click', (e) => {
+        e.preventDefault();
+        const dialog = document.getElementById("positionDialog");
+        dialog.showModal();
+      });
+
+      const affiliationDialog = document.getElementById("affiliationDialog");
+      
+      // 送信するボタンが押されたらfetchで送る
+      document.getElementById("saveAffiliationBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        const targetUrl = e.target.dataset.url;
+
+        const inputElement = document.getElementById("affiliationInput"); 
+        const requestAffiliation = inputElement.value;
+
+        if (!requestAffiliation) {
+          alert("所属名を入力してください。");
+          return;
+        }
+
+        try {
+          const response = await fetch(targetUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: requestAffiliation.trim()
+          });
+
+          if (response.status === 409) {
+            alert(`「${requestAffiliation}」は既に存在します。別の名前を指定してください。`);
+          } else if (response.ok) {
+            
+            // 🌟 追加: サーバーから返ってきたJSON（Affiliationオブジェクト）をパースする
+            const responseData = await response.json();
+            
+            const selectElement = document.getElementById("affiliationSelect");
+            
+            if (selectElement) {
+              const newOption = document.createElement("option");
+              
+              // 🌟 変更: JSONデータの id を value に、affiliation をテキストにセット！
+              newOption.value = responseData.id;
+              newOption.textContent = responseData.affiliation;
+              
+              selectElement.appendChild(newOption);
+              
+              // 追加した項目を自動選択
+              newOption.selected = true; 
+            }
+
+            inputElement.value = "";
+            affiliationDialog.close();
+            
+          } else {
+            alert("予期せぬエラーが発生しました。ステータスコード: " + response.status);
+          }
+          
+        } catch (error) {
+          console.error("通信エラー:", error);
+          alert("サーバーとの通信に失敗しました。");
+        }
+      });
+
+      // 送信するボタンが押されたらfetchで送る
+      document.getElementById("savePositionBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        const targetUrl = e.target.dataset.url;
+
+        const inputElement = document.getElementById("positionInput"); 
+        const requestPosition = inputElement.value;
+
+        if (!requestPosition) {
+          alert("役職名を入力してください。");
+          return;
+        }
+
+        try {
+          const response = await fetch(targetUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: requestPosition.trim()
+          });
+
+          if (response.status === 409) {
+            alert(`「${requestPosition}」は既に存在します。別の名前を指定してください。`);
+          } else if (response.ok) {
+            
+            // 🌟 追加: サーバーから返ってきたJSON（Positionオブジェクト）をパースする
+            const responseData = await response.json();
+            
+            const selectElement = document.getElementById("positionSelect");
+            
+            if (selectElement) {
+              const newOption = document.createElement("option");
+              
+              // 🌟 変更: JSONデータの id を value に、position をテキストにセット！
+              newOption.value = responseData.id;
+              newOption.textContent = responseData.position;
+              
+              selectElement.appendChild(newOption);
+              
+              // 追加した項目を自動選択
+              newOption.selected = true; 
+            }
+
+            inputElement.value = "";
+            positionDialog.close(); // ダイアログの変数名も変更
+            
+          } else {
+            alert("予期せぬエラーが発生しました。ステータスコード: " + response.status);
+          }
+          
+        } catch (error) {
+          console.error("通信エラー:", error);
+          alert("サーバーとの通信に失敗しました。");
+        }
+      });
+
+    });
+  </script>
 </body>
 </html>

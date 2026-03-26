@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<th:block th:fragment="positionDialog" xmlns:th="http://www.thymeleaf.org">
+  <dialog id="positionDialog" class="feature-dialog">
+    <div class="dialog-header">
+      <h3>役職設定</h3>
+    </div>
+    
+    <div class="dialog-body">
+      <form id="positionForm">
+        <label for="positionInput">役職名:</label>
+        <input type="text" name="position" id="positionInput">
+      </form>
+    </div>
+    
+    <div class="dialog-footer">
+      <button type="button" id="closePositionDialogBtn">
+        キャンセル
+      </button>
+      <button type="button" form="positionForm" id="savePositionBtn" th:data-url="@{/api/positions}">
+        保存
+      </button>
+    </div>
+  </dialog>
+
+  <style>
+    dialog {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .dialog-footer {
+      margin-top: 15px;
+      text-align: right;
+    }
+  </style>
+
+  <script>
+    // モーダル制御
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      const positionDialog = document.getElementById("positionDialog");
+
+      // 閉じるボタンが押されたらclose
+      document.getElementById("closePositionDialogBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        positionDialog.close();
+      });
+
+    })
+  </script>
+</th:block>

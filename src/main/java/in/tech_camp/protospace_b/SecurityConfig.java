@@ -24,7 +24,6 @@ public class SecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authorizeRequests -> authorizeRequests
             .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-
             .requestMatchers(
                 "/css/**",
                 "/images/**",
@@ -38,7 +37,6 @@ public class SecurityConfig {
                 "/error/**",
                 "/prototypes/search"
                 ).permitAll()
-                
             .requestMatchers(HttpMethod.POST, "/user").permitAll()
             .requestMatchers("/prototypes/new", "/prototypes/*/edit", "/prototypes/*/delete").authenticated()
             .anyRequest().permitAll())

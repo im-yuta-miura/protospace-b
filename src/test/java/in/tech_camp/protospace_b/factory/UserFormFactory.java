@@ -15,8 +15,8 @@ public class UserFormFactory {
 
     userForm.setName(generatedUsername);
     userForm.setProfile(faker.animal().toString());
-    userForm.setAffiliation(faker.dragonBall().toString());
-    userForm.setPosition(faker.pokemon().toString());
+    userForm.setAffiliationId(1);
+    userForm.setPositionId(1);
     userForm.setEmail(faker.internet().emailAddress());
     userForm.setPassword(faker.internet().password(6, 12));
     userForm.setPasswordConfirmation(userForm.getPassword());
