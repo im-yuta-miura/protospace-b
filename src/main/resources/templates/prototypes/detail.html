@@ -42,7 +42,8 @@
             </div>
             <!-- Frame6 -->
             <form th:action="@{/prototypes/{prototypeId}/delete(prototypeId=${prototype.id})}" th:method="post">
-              <input type="submit" class="delete-btn" value="削除する">
+              <input type="submit" class="delete-btn" value="削除する"
+                onclick="return confirm('本当に削除してもよろしいですか？\nこの操作は取り消せません。');">
             </form>
           </div>
         </div>
@@ -96,10 +97,17 @@
             <!-- Frame51 -->
             <ul class="comments_contents" th:if="${prototype.comments != null}">
               <li th:each="comment : ${comments}" class="comment_item">
-                <p>
-                  <span th:text="${comment.content}"></span>
+                <div class="comment_content_box">
+                  <span th:text="${comment.content}" class="comment_text_body"></span>
                   <a th:href="@{/users/{id}/mypage(id=${comment.user.id})}" th:text="|（ ${comment.user.name} ）|" class="comment-username-link"></a>
-                </p>
+                </div>
+                <div th:if="${#authorization.expression('isAuthenticated()') and #authentication.principal.id == comment.user.id}" class="comment-manage-btns">
+                  <a th:href="@{/comments/{id}/edit(id=${comment.id})}" class="edit-btn">編集する</a>
+                  <form th:action="@{/comments/{id}/delete(id=${comment.id})}" th:method="post" style="display: inline;">
+                    <input type="submit" class="delete-btn" value="削除する"
+                    onclick="return confirm('本当に削除してもよろしいですか？\nこの操作は取り消せません。');">
+                  </form>
+                </div>
               </li>
             </ul>
           </div>

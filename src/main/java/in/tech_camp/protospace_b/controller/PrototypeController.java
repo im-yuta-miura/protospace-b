@@ -24,6 +24,7 @@ import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.form.CommentForm;
 import in.tech_camp.protospace_b.form.PrototypeForm;
+import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.repository.PrototypeRepository;
 import in.tech_camp.protospace_b.validation.ValidationPriority1;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,12 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PrototypeController {
   private final PrototypeRepository prototypeRepository;
-
   private final ImageUrl imageUrl;
+
+  @ModelAttribute("searchForm")
+  public SearchForm setUpSearchForm() {
+      return new SearchForm();
+  }
 
   @GetMapping("/prototypes/new")
     public String showForm(Model model) {
@@ -110,6 +115,11 @@ public class PrototypeController {
   public String showPrototypeDetail(@PathVariable("prototypeId") Integer prototypeId, Model model) {
 
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+    
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
+    }
+    
     CommentForm commentForm = new CommentForm();
 
     model.addAttribute("prototype", prototype);
@@ -125,9 +135,13 @@ public class PrototypeController {
     
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
 
-    if (prototype == null || !prototype.getUser_id().equals(currentUser.getId())) {
-      return "redirect:/prototypes/" + prototypeId;
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
     }
+
+    if (!prototype.getUser_id().equals(currentUser.getId())) {
+    return "redirect:/prototypes/" + prototypeId;
+}
 
     try {
       prototypeRepository.deleteById(prototypeId);
@@ -143,7 +157,7 @@ public class PrototypeController {
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
 
     if (prototype == null) {
-        return "redirect:/";
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
     }
 
     CustomUserDetail userDetail = (CustomUserDetail) authentication.getPrincipal();
@@ -175,6 +189,15 @@ public class PrototypeController {
     }
 
     PrototypeEntity prototype = prototypeRepository.findById(prototypeId);
+
+    if (prototype == null) {
+        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
+    }
+    
+    if (!prototype.getUser_id().equals(((CustomUserDetail) org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId())) {
+    return "redirect:/prototypes/" + prototypeId;
+    }
+
     prototype.setTitle(prototypeForm.getTitle());
     prototype.setCatchphrase(prototypeForm.getCatchphrase());
     prototype.setConcept(prototypeForm.getConcept());
@@ -213,5 +236,13 @@ public class PrototypeController {
     }
 
     return "redirect:/prototypes/" + prototypeId;
+  }
+
+  @GetMapping("/prototypes/search")
+  public String searchPrototypes(@ModelAttribute("searchForm") SearchForm searchForm, Model model) {
+    List<PrototypeEntity> prototypes = prototypeRepository.findByTextContaining(searchForm.getTitle());
+    model.addAttribute("prototypes", prototypes);
+    model.addAttribute("searchForm", searchForm);
+    return "prototypes/search";
   }
 }

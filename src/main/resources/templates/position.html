@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<div class="user_field" th:fragment="positionDialog(positions, currentId)" xmlns:th="http://www.thymeleaf.org">
+  <label for="position">役職</label>
+  <div>
+    <select id="positionSelect" name="positionId">
+      <option value="0" disabled>役職を選択してください</option>
+      <option
+        th:each="position : ${positions}"
+        th:value="${position.id}"
+        th:text="${position.position}"
+        th:selected="${position.id == currentId}"></option>
+    </select>
+    <button type="button" id="addPositionBtn" class="position_button">役職追加</button>
+    <dialog id="positionDialog" class="feature-dialog">
+      <div class="dialog-header">
+        <h3>役職設定</h3>
+      </div>
+      
+      <div class="dialog-body">
+        <label for="positionInput">役職:</label>
+        <input type="text" name="position" id="positionInput" class="position_input">
+      </div>
+      
+      <div class="dialog_footer">
+        <button type="button" id="closePositionDialogBtn" class="position_button_2">
+          キャンセル
+        </button>
+        <button type="button" class="position_button" id="savePositionBtn" th:data-url="@{/api/positions}">
+          保存
+        </button>
+      </div>
+    </dialog>
+  </div>
+
+  <style>
+    dialog {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .dialog_footer {
+      margin-top: 15px;
+      text-align: right;
+      display: flex;
+      gap: 16px;
+    }
+
+    #positionSelect {
+      height: 100%;
+      padding: 5px 0;
+    }
+
+    .position_input{
+      width: 100%;
+      height: 22px;
+      max-width: 141px;
+    }
+
+    .position_button{
+      min-width: 100px;
+      padding: 5px 20px;
+      background-color: #87CEFA;
+      color: #FFFFFF;
+      font-size: 14px;
+      box-shadow: 0 3px 3px rgba(0,0,0,0.14);
+      border: none;
+      border-radius: 3px;
+    }
+
+    .position_button_2{
+      min-width: 100px;
+      padding: 5px 20px;
+      background-color: #727272;
+      color: #FFFFFF;
+      font-size: 14px;
+      box-shadow: 0 3px 3px rgba(0,0,0,0.14);
+      border: none;
+      border-radius: 3px;
+    }
+  </style>
+
+  <script>
+
+    // モーダル制御
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      const positionDialog = document.getElementById("positionDialog");
+      
+      // 閉じるボタンが押されたらclose
+      document.getElementById("closePositionDialogBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        positionDialog.close();
+      });
+          
+      document.getElementById("addPositionBtn").addEventListener('click', (e) => {
+        e.preventDefault();
+        const dialog = document.getElementById("positionDialog");
+        dialog.showModal();
+      });
+
+      // 送信するボタンが押されたらfetchで送る
+      document.getElementById("savePositionBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        const targetUrl = e.target.dataset.url;
+
+        const inputElement = document.getElementById("positionInput"); 
+        const requestPosition = inputElement.value;
+
+        if (!requestPosition) {
+          alert("役職名を入力してください。");
+          return;
+        }
+
+        try {
+          const response = await fetch(targetUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: requestPosition.trim()
+          });
+
+          if (response.status === 409) {
+            alert(`「${requestPosition}」は既に存在します。別の名前を指定してください。`);
+          } else if (response.ok) {
+            
+            // 🌟 追加: サーバーから返ってきたJSON（Positionオブジェクト）をパースする
+            const responseData = await response.json();
+            
+            const selectElement = document.getElementById("positionSelect");
+            
+            if (selectElement) {
+              const newOption = document.createElement("option");
+              
+              // 🌟 変更: JSONデータの id を value に、position をテキストにセット！
+              newOption.value = responseData.id;
+              newOption.textContent = responseData.position;
+              
+              selectElement.appendChild(newOption);
+              
+              // 追加した項目を自動選択
+              newOption.selected = true; 
+            }
+
+            inputElement.value = "";
+            positionDialog.close();
+            
+          } else {
+            alert("予期せぬエラーが発生しました。ステータスコード: " + response.status);
+          }
+          
+        } catch (error) {
+          console.error("通信エラー:", error);
+          alert("サーバーとの通信に失敗しました。");
+        }
+      });
+
+    });
+  </script>
+</div>

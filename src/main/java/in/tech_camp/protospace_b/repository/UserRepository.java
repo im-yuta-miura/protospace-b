@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import in.tech_camp.protospace_b.entity.UserEntity;
 
@@ -16,9 +17,9 @@ public interface UserRepository {
   List<UserEntity> findAll();
 
   @Insert("INSERT INTO users ("
-    + "  name, profile, affiliation, position, email, password"
+    + "  name, profile, affiliation_id, position_id, email, password"
     + ") VALUES ("
-    + "  #{name}, #{profile}, #{affiliation}, #{position}, #{email}, #{password}"
+    + "  #{name}, #{profile}, #{affiliationId}, #{positionId}, #{email}, #{password}"
     + ")")
   @Options(useGeneratedKeys = true, keyProperty = "id")
   void insert(UserEntity user);
@@ -31,4 +32,10 @@ public interface UserRepository {
 
   @Select("SELECT * FROM users WHERE id = #{id} LIMIT 1")
   UserEntity findById(Integer id);
+
+  @Update("UPDATE users " +
+        "SET name = #{name}, email = #{email}, profile = #{profile}, " +
+        "affiliation_id = #{affiliationId}, position_id = #{positionId}, " +
+        "updated_at = NOW() WHERE id = #{id}")
+  void update(UserEntity user);
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザー新規登録ページ</title>
+  <title>ユーザー情報編集ページ</title>
   <!--  -->
   <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,28 +19,18 @@
 
     <div class="users_module">
       
-      <h1 class="heading">ユーザー新規登録</h1>
+      <h1 class="heading">ユーザー情報編集</h1>
       
       <ul th:if="${errorMessages != null and !errorMessages.empty}">
         <li th:each="message : ${errorMessages}" th:text="${message}" style="color: red;"></li>
       </ul>
 
-      <form th:action="@{/user}" th:method="post" th:object="${userForm}" class="user_form">
+      <form th:action="@{/user/{id}/update(id=${userId})}" th:method="post" th:object="${userForm}" class="user_form">
 
         <div class="user_field_area">
           <div class="user_field">
             <label for="email">メールアドレス</label>
             <input type="email" id="email" th:field="*{email}"  autofocus="autofocus"/>
-          </div>
-
-          <div class="user_field">
-            <label for="password">パスワード（6文字以上）</label>
-            <input type="password" id="password" th:field="*{password}"  autofocus="autofocus"/>
-          </div>
-
-          <div class="user_field">
-            <label for="passwordConfirmation">パスワード再入力</label>
-            <input type="password" id="passwordConfirmation" th:field="*{passwordConfirmation}"  autofocus="autofocus"/>
           </div>
 
           <div class="user_field">
@@ -56,13 +46,13 @@
           <th:block th:replace="~{affiliation :: affiliationDialog(${affiliations}, ${userForm.affiliationId})}"></th:block>
 
           <th:block th:replace="~{position :: positionDialog(${positions}, ${userForm.positionId})}"></th:block>
+          
         </div>
-        <button class="submit_button" type="submit">新規登録</button>
         
+        <button class="submit_button" type="submit">保存する</button>
       </form>
     </div>
   </div>
   <th:block th:replace="~{footer :: footer}"></th:block>
-  
 </body>
 </html>

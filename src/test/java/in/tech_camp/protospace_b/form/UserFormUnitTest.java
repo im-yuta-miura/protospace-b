@@ -82,7 +82,7 @@ public class UserFormUnitTest {
 
     @Test
     public void 所属が空の場合バリデーションエラーが発生する() {
-      userForm.setAffiliation("");
+      userForm.setAffiliationId(null);
       Set<ConstraintViolation<UserForm>> violations = validator.validate(userForm, ValidationOrder.class);
       assertEquals(1, violations.size());
       assertEquals("所属は必須です", violations.iterator().next().getMessage());
@@ -90,7 +90,7 @@ public class UserFormUnitTest {
     
     @Test
     public void 役職が空の場合バリデーションエラーが発生する() {
-      userForm.setPosition("");
+      userForm.setPositionId(null);
       Set<ConstraintViolation<UserForm>> violations = validator.validate(userForm, ValidationOrder.class);
       assertEquals(1, violations.size());
       assertEquals("役職は必須です", violations.iterator().next().getMessage());

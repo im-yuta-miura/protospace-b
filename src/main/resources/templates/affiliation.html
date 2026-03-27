@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<div class="user_field" th:fragment="affiliationDialog(affiliations, currentId)" xmlns:th="http://www.thymeleaf.org">
+  <label for="affiliation">所属</label>
+  <div>
+    <select id="affiliationSelect" name="affiliationId">
+      <option value="0" disabled>所属を選択してください</option>
+      <option
+        th:each="affiliation : ${affiliations}"
+        th:value="${affiliation.id}"
+        th:text="${affiliation.affiliation}"
+        th:selected="${affiliation.id == currentId}"></option>
+    </select>
+    <button type="button" id="addAffiliationBtn" class="affiliation_button">所属追加</button>
+    <dialog id="affiliationDialog" class="feature-dialog">
+      <div class="dialog-header">
+        <h3>所属設定</h3>
+      </div>
+      
+      <div class="dialog-body">
+        <label for="affiliationInput">所属:</label>
+        <input type="text" name="affiliation" id="affiliationInput" class="affiliation_input">
+      </div>
+      
+      <div class="dialog_footer">
+        <button type="button" id="closeAffiliationDialogBtn" class="affiliation_button_2">
+          キャンセル
+        </button>
+        <button type="button" class="affiliation_button" id="saveAffiliationBtn" th:data-url="@{/api/affiliations}">
+          保存
+        </button>
+      </div>
+    </dialog>
+  </div>
+
+  <style>
+    dialog {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .dialog_footer {
+      margin-top: 15px;
+      text-align: right;
+      display: flex;
+      gap: 16px;
+    }
+
+    #affiliationSelect {
+      height: 100%;
+      padding: 5px 0;
+    }
+
+    .affiliation_input{
+      width: 100%;
+      height: 22px;
+      max-width: 141px;
+    }
+
+    .affiliation_button{
+      min-width: 100px;
+      padding: 5px 20px;
+      background-color: #87CEFA;
+      color: #FFFFFF;
+      font-size: 14px;
+      box-shadow: 0 3px 3px rgba(0,0,0,0.14);
+      border: none;
+      border-radius: 3px;
+    }
+
+    .affiliation_button_2{
+      min-width: 100px;
+      padding: 5px 20px;
+      background-color: #727272;
+      color: #FFFFFF;
+      font-size: 14px;
+      box-shadow: 0 3px 3px rgba(0,0,0,0.14);
+      border: none;
+      border-radius: 3px;
+    }
+  </style>
+
+  <script>
+
+    // モーダル制御
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      const affiliationDialog = document.getElementById("affiliationDialog");
+      
+      // 閉じるボタンが押されたらclose
+      document.getElementById("closeAffiliationDialogBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        affiliationDialog.close();
+      });
+          
+      document.getElementById("addAffiliationBtn").addEventListener('click', (e) => {
+        e.preventDefault();
+        const dialog = document.getElementById("affiliationDialog");
+        dialog.showModal();
+      });
+
+      // 送信するボタンが押されたらfetchで送る
+      document.getElementById("saveAffiliationBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+        const targetUrl = e.target.dataset.url;
+
+        const inputElement = document.getElementById("affiliationInput"); 
+        const requestAffiliation = inputElement.value;
+
+        if (!requestAffiliation) {
+          alert("所属名を入力してください。");
+          return;
+        }
+
+        try {
+          const response = await fetch(targetUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain',
+            },
+            body: requestAffiliation.trim()
+          });
+
+          if (response.status === 409) {
+            alert(`「${requestAffiliation}」は既に存在します。別の名前を指定してください。`);
+          } else if (response.ok) {
+            
+            // 🌟 追加: サーバーから返ってきたJSON（Affiliationオブジェクト）をパースする
+            const responseData = await response.json();
+            
+            const selectElement = document.getElementById("affiliationSelect");
+            
+            if (selectElement) {
+              const newOption = document.createElement("option");
+              
+              // 🌟 変更: JSONデータの id を value に、affiliation をテキストにセット！
+              newOption.value = responseData.id;
+              newOption.textContent = responseData.affiliation;
+              
+              selectElement.appendChild(newOption);
+              
+              // 追加した項目を自動選択
+              newOption.selected = true; 
+            }
+
+            inputElement.value = "";
+            affiliationDialog.close();
+            
+          } else {
+            alert("予期せぬエラーが発生しました。ステータスコード: " + response.status);
+          }
+          
+        } catch (error) {
+          console.error("通信エラー:", error);
+          alert("サーバーとの通信に失敗しました。");
+        }
+      });
+
+    });
+  </script>
+</div>

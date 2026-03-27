@@ -8,8 +8,8 @@ public record CustomUser(
   Integer id,
   String name,
   String profile,
-  String affiliation,
-  String position,
+  Integer affiliationId,
+  Integer positionId,
   String email,
   String password
 ) {
@@ -18,8 +18,8 @@ public record CustomUser(
       .id(entity.getId())
       .name(entity.getName())
       .profile(entity.getProfile())
-      .affiliation(entity.getAffiliation())
-      .position(entity.getPosition())
+      .affiliationId(entity.getAffiliationId())
+      .positionId(entity.getPositionId())
       .email(entity.getEmail())
       .password(entity.getPassword())
       .build();

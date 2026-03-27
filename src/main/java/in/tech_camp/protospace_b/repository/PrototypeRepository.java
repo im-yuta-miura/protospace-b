@@ -49,7 +49,14 @@ public interface PrototypeRepository {
         one = @One(select = "in.tech_camp.protospace_b.repository.UserRepository.findById"))
   })
   List<PrototypeEntity> getByUserIdWithUser(Integer userId);
+  
   @Update("UPDATE prototypes SET title = #{title}, catchphrase = #{catchphrase}, concept = #{concept}, image = #{image} WHERE id = #{id}")
   void update(PrototypeEntity prototype);
 
+  @Select("SELECT * FROM prototypes WHERE title LIKE CONCAT('%', #{text}, '%') OR catchphrase LIKE CONCAT('%', #{text}, '%') OR concept LIKE CONCAT('%', #{text}, '%')")
+  @Results(value = {
+    @Result(property = "user", column = "user_id",
+            one = @One(select = "in.tech_camp.protospace_b.repository.UserRepository.findById")),
+  })
+  List<PrototypeEntity> findByTextContaining(String text);
 }
