@@ -33,8 +33,9 @@ public interface UserRepository {
   @Select("SELECT * FROM users WHERE id = #{id} LIMIT 1")
   UserEntity findById(Integer id);
 
-  @Update("UPDATE users SET name = #{name}, email = #{email}, profile = #{profile}, " +
-        "affiliation = #{affiliation}, position = #{position}, " +
+  @Update("UPDATE users " +
+        "SET name = #{name}, email = #{email}, profile = #{profile}, " +
+        "affiliation_id = #{affiliationId}, position_id = #{positionId}, " +
         "updated_at = NOW() WHERE id = #{id}")
   void update(UserEntity user);
 }

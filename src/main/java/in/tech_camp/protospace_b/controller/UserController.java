@@ -171,6 +171,12 @@ public class UserController {
 
     UserEditForm userForm = new UserEditForm();
 
+    List<PositionEntity> positions = positionService.getPositionOptions();
+    model.addAttribute("positions", positions);
+
+    List<AffiliationEntity> affiliations = affiliationService.getAffiliationOptions();
+    model.addAttribute("affiliations", affiliations);
+
     userForm.setName(user.getName());
     userForm.setProfile(user.getProfile());
     userForm.setAffiliationId(user.getAffiliationId());
