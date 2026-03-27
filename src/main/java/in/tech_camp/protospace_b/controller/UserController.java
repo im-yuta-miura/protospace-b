@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.AffiliationEntity;
 import in.tech_camp.protospace_b.entity.PositionEntity;
-import in.tech_camp.protospace_b.custom_user.CustomUserDetail;
 import in.tech_camp.protospace_b.entity.PrototypeEntity;
 import in.tech_camp.protospace_b.entity.UserEntity;
 import in.tech_camp.protospace_b.exception.EmailAlreadyExistsException;
 import in.tech_camp.protospace_b.form.SearchForm;
 import in.tech_camp.protospace_b.form.UserEditForm;
 import in.tech_camp.protospace_b.form.UserForm;
+import in.tech_camp.protospace_b.repository.UserRepository;
 import in.tech_camp.protospace_b.service.AffiliationService;
 import in.tech_camp.protospace_b.service.PositionService;
-import in.tech_camp.protospace_b.repository.UserRepository;
 import in.tech_camp.protospace_b.service.PrototypeService;
 import in.tech_camp.protospace_b.service.UserService;
 import in.tech_camp.protospace_b.validation.ValidationOrder;
@@ -173,8 +173,8 @@ public class UserController {
 
     userForm.setName(user.getName());
     userForm.setProfile(user.getProfile());
-    userForm.setAffiliation(user.getAffiliation());
-    userForm.setPosition(user.getPosition());
+    userForm.setAffiliationId(user.getAffiliationId());
+    userForm.setPositionId(user.getPositionId());
     userForm.setEmail(user.getEmail());
 
     model.addAttribute("userForm", userForm);
@@ -209,8 +209,8 @@ public class UserController {
 
     user.setName(userForm.getName());
     user.setProfile(userForm.getProfile());
-    user.setAffiliation(userForm.getAffiliation());
-    user.setPosition(userForm.getPosition());
+    user.setAffiliationId(userForm.getAffiliationId());
+    user.setPositionId(userForm.getPositionId());
     user.setEmail(userForm.getEmail());
 
     try {

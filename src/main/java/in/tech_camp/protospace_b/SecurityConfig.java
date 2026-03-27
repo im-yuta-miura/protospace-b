@@ -28,6 +28,7 @@ public class SecurityConfig {
                 "/css/**",
                 "/images/**",
                 "/uploads/**",
+                "/js/**",
                 "/",
                 "/users/sign_up",
                 "/users/login",

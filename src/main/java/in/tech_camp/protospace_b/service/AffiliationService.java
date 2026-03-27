@@ -25,7 +25,7 @@ public class AffiliationService {
   }
 
   public AffiliationEntity createAffiliations(String requestAffiliation) throws AffiliationAlreadyExistsException {
-
+    
     if(affiliationRepository.existsByAffiliation(requestAffiliation)) {
       throw new AffiliationAlreadyExistsException("所属は既に存在します。");
     }
